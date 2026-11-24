@@ -8,8 +8,9 @@
 </head>
 <body>
   <aside>
-    <div class="brand">Reel Engine</div>
+    <div class="brand" id="brandBtn">Reel Engine</div>
     <button id="newBtn" class="primary wide">+ New reel</button>
+    <button id="homeBtn" class="wide nav">🏠 Home</button>
     <button id="aestheticBtn" class="wide nav">✨ Aesthetic reels</button>
     <button id="libraryBtn" class="wide nav">Asset library</button>
     <button id="stylesBtn" class="wide nav">🎓 Learn from a reel</button>
@@ -21,6 +22,57 @@
 
   <main>
     <div id="health"></div>
+
+    <section id="homeView" hidden>
+      <div class="hero">
+        <div class="eyebrow">AI Reel Engine</div>
+        <h1 class="hero-title">Type a topic. Get a finished reel.</h1>
+        <p class="hero-sub">Claude writes and reviews the script, then the engine records the voice, makes the images, animates every beat, checks its own render and exports the video with a cover and caption. It all runs on your machine.</p>
+        <div class="row hero-form">
+          <input id="homeTopic" class="grow" placeholder="e.g. monochrome outfits, 1 polo 5 outfits, colours for wheatish skin" />
+          <button id="homeCreate" class="primary">Create reel</button>
+        </div>
+        <div class="row hero-alt">
+          <button id="homeIdeas" class="small">✨ Get trending ideas</button>
+          <span class="muted">or pick a format below</span>
+        </div>
+      </div>
+
+      <div class="home-grid">
+        <div class="card">
+          <h2>Setup</h2>
+          <div id="homeStatus" class="status-list"></div>
+          <p class="muted small-print">Everything works without keys. Add keys to <code>.env</code> for a better voice and images, then restart.</p>
+        </div>
+        <div class="card">
+          <h2>Recent reels</h2>
+          <div id="homeRecent" class="recent-list"></div>
+        </div>
+      </div>
+
+      <h2 class="section-title">Formats</h2>
+      <div id="homeFormats" class="home-formats"></div>
+
+      <h2 class="section-title">How a reel is made</h2>
+      <ol class="pipeline">
+        <li><b>Idea</b><span>Trends, a topic bank and past results</span></li>
+        <li><b>Script</b><span>Claude writes it beat by beat</span></li>
+        <li><b>Review</b><span>A second pass scores and rewrites it</span></li>
+        <li><b>Voice</b><span>With word timings</span></li>
+        <li><b>Images</b><span>From the library or generated</span></li>
+        <li><b>Motion</b><span>Type, layout and animation per beat</span></li>
+        <li><b>Render</b><span>Sound effects, music, ffmpeg</span></li>
+        <li><b>Self-check</b><span>Claude reviews the video and fixes it</span></li>
+      </ol>
+
+      <h2 class="section-title">Tools</h2>
+      <div class="home-tools">
+        <button class="tool" data-go="stylesBtn"><b>🎓 Learn from a reel</b><span>Upload a reel you like and get a reusable style card</span></button>
+        <button class="tool" data-go="motionsBtn"><b>🎬 Motion library</b><span>Preview and rate every animation</span></button>
+        <button class="tool" data-go="libraryBtn"><b>🖼 Asset library</b><span>Your images, and the ones reels still need</span></button>
+        <button class="tool" data-go="instagramBtn"><b>📈 Instagram</b><span>Pull real stats back into new ideas</span></button>
+      </div>
+    </section>
 
     <section id="newView">
       <div class="row between">

@@ -56,11 +56,75 @@ let current = null;
 let poll = null;
 
 function show(view) {
-  for (const id of ["newView", "packView", "libraryView", "stylesView", "motionsView", "aestheticView", "instagramView"]) $(`#${id}`).hidden = id !== view;
+  for (const id of ["homeView", "newView", "packView", "libraryView", "stylesView", "motionsView", "aestheticView", "instagramView"]) $(`#${id}`).hidden = id !== view;
+  $("#health").hidden = view === "homeView";
+}
+
+let health = null;
+
+function renderHomeStatus() {
+  if (!health) return;
+  const rows = [
+    ["Claude", { api: ["API key", true], cli: ["Claude Code (your subscription)", true], manual: ["Copy/paste via claude.ai", false] }[health.claude]],
+    ["Voice", { sarvam: ["Sarvam", true], elevenlabs: ["ElevenLabs", true], mac: ["Free macOS voice", false] }[health.voice] ?? [health.voice, true]],
+    ["Images", { gemini: ["Gemini", true], cloudflare: ["Cloudflare FLUX.2", true], pollinations: ["Free generator", false] }[health.images] ?? [health.images, true]],
+  ];
+  $("#homeStatus").replaceChildren(
+    ...rows.map(([name, [value, good]]) =>
+      h("div", { class: "status-row" }, h("span", { class: `dot ${good ? "ok" : "basic"}` }), h("b", {}, name), h("span", { class: "muted" }, value)),
+    ),
+  );
+}
+
+function renderHomeFormats() {
+  const cards = [
+    ["editorial", "Style rules", "Kinetic typography, colour boards and cutout models. Hinglish.", () => pickFormat("editorial")],
+    ["aesthetic", "Aesthetic", "A calm studio look where one model's outfit changes in place. English.", () => showAesthetic()],
+    ["fit", "AI fit", "A mirror-selfie outfit on an AI model with a Comment LINK sticker.", () => pickFormat("fit")],
+    ["classic", "Quick tips", "Tips over stock or AI clips with word-by-word captions.", () => pickFormat("classic")],
+  ];
+  $("#homeFormats").replaceChildren(
+    ...cards.map(([id, title, desc, go]) => h("button", { class: `fmt fmt-${id}`, onclick: go }, h("b", {}, title), h("span", {}, desc), h("i", {}, "Start →"))),
+  );
+}
+
+async function pickFormat(id) {
+  format = id;
+  await showNew();
+  $(".other-formats").open = id !== "editorial";
+  $("#topic").focus();
+}
+
+async function showHome() {
+  current = null;
+  clearInterval(poll);
+  show("homeView");
+  renderHomeStatus();
+  renderHomeFormats();
+  loadPacks();
+  const packs = await api("/api/packs").catch(() => []);
+  $("#homeRecent").replaceChildren(
+    ...(packs.length
+      ? packs.slice(0, 5).map((p) =>
+          h("div", { class: "recent", onclick: () => openPack(p.slug) }, h("b", {}, p.title), h("span", { class: "muted" }, FORMAT_INFO[p.format]?.title ?? p.format)),
+        )
+      : [h("p", { class: "muted" }, "No reels yet. Type a topic above to make your first one.")]),
+  );
+}
+
+async function homeCreate() {
+  const topic = $("#homeTopic").value.trim();
+  if (!topic) return $("#homeTopic").focus();
+  format = "editorial";
+  await showNew();
+  $("#topic").value = topic;
+  createReel({ topic }, $("#createOwn"));
 }
 
 async function loadHealth() {
   const hl = await api("/api/health");
+  health = hl;
+  renderHomeStatus();
   provider = hl.claude;
   const note = {
     api: "Scripts: Claude API key.",
@@ -1507,6 +1571,16 @@ function flash(btn, text) {
 }
 
 $("#newBtn").onclick = showNew;
+$("#homeBtn").onclick = showHome;
+$("#brandBtn").onclick = showHome;
+$("#homeCreate").onclick = homeCreate;
+$("#homeTopic").addEventListener("keydown", (e) => e.key === "Enter" && homeCreate());
+$("#homeIdeas").onclick = async () => {
+  format = "editorial";
+  await showNew();
+  getIdeas();
+};
+for (const b of $$("[data-go]")) b.onclick = () => $(`#${b.dataset.go}`).click();
 $("#libraryBtn").onclick = showLibrary;
 $("#stylesBtn").onclick = showStyles;
 $("#motionsBtn").onclick = showMotions;
@@ -1812,7 +1886,7 @@ $("#applyJson").onclick = applyJson;
 loadHealth();
 let LAYOUTS = ["auto", "sandwich", "side", "hero", "float", "edge", "cards", "closeup", "slider", "verdict", "zoom", "scale", "duo", "mosaic", "corner", "dm"];
 api("/api/layouts").then((l) => (LAYOUTS = l)).catch(() => {});
-showNew();
+showHome();
 
 $("#copyCaptionBtn").onclick = async () => {
   const text = `${$("#caption").value.trim()}\n\n${$("#hashtags").value.trim()}`;
