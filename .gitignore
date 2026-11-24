@@ -18,3 +18,4 @@ assets/motions/scenes.txt
 assets/motions/.fxcache/
 assets/styles/*/sheet-*.png
 __pycache__/
+assets/.instagram.json
