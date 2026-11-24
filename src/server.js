@@ -26,7 +26,8 @@ import { kindOf } from "./visuals.js";
 
 const app = express();
 app.use(express.json({ limit: "2mb" }));
-app.use(express.static(path.join(config.root, "public")));
+app.use(express.static(path.join(config.root, "public"), { extensions: ["html"] }));
+app.use("/fonts", express.static(path.join(config.root, "node_modules", "@fontsource")));
 app.use("/packs", express.static(config.packsDir));
 app.use("/library", express.static(libraryDir));
 app.use("/styles", express.static(path.join(config.root, "assets", "styles")));

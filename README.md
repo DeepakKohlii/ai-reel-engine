@@ -23,7 +23,7 @@ Needs Node 20+ and ffmpeg (`brew install ffmpeg`). Works best on macOS.
 | Voice | The free macOS voice |
 | Images | A free image generator (lower quality) |
 
-Then click **+ New reel**, type a topic (e.g. "monochrome outfits"), and hit **Create reel**.
+`http://localhost:4747` opens the product page. Click **Open the studio** (or go to `/studio`), type a topic (e.g. "monochrome outfits"), and hit **Create reel**.
 
 ---
 

@@ -3,298 +3,248 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Reel Engine</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>AI Reel Engine · Type a topic, get a finished reel</title>
+  <meta name="description" content="An AI pipeline that writes, reviews, voices, designs, animates and checks Instagram reels. Runs on your machine with your own keys." />
+  <link rel="stylesheet" href="/fonts/instrument-serif/400.css" />
+  <link rel="stylesheet" href="/fonts/instrument-serif/400-italic.css" />
+  <link rel="stylesheet" href="/fonts/inter/400.css" />
+  <link rel="stylesheet" href="/fonts/inter/600.css" />
+  <link rel="stylesheet" href="/fonts/inter/800.css" />
+  <link rel="stylesheet" href="/fonts/anton/400.css" />
+  <link rel="stylesheet" href="landing.css" />
 </head>
 <body>
-  <aside>
-    <div class="brand" id="brandBtn">Reel Engine</div>
-    <button id="newBtn" class="primary wide">+ New reel</button>
-    <button id="homeBtn" class="wide nav">🏠 Home</button>
-    <button id="aestheticBtn" class="wide nav">✨ Aesthetic reels</button>
-    <button id="libraryBtn" class="wide nav">Asset library</button>
-    <button id="stylesBtn" class="wide nav">🎓 Learn from a reel</button>
-    <button id="motionsBtn" class="wide nav">🎬 Motion library</button>
-    <button id="instagramBtn" class="wide nav">📈 Instagram</button>
-    <div class="label">Packs</div>
-    <ul id="packList"></ul>
-  </aside>
+  <header class="nav">
+    <a class="logo" href="/"><span>▶</span> Reel Engine</a>
+    <nav>
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#formats">Formats</a>
+      <a href="#start">Get started</a>
+      <a href="https://github.com/DeepakKohlii/ai-reel-engine" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+    <a class="btn btn-solid" href="/studio">Open the studio</a>
+  </header>
 
-  <main>
-    <div id="health"></div>
-
-    <section id="homeView" hidden>
-      <div class="hero">
-        <div class="eyebrow">AI Reel Engine</div>
-        <h1 class="hero-title">Type a topic. Get a finished reel.</h1>
-        <p class="hero-sub">Claude writes and reviews the script, then the engine records the voice, makes the images, animates every beat, checks its own render and exports the video with a cover and caption. It all runs on your machine.</p>
-        <div class="row hero-form">
-          <input id="homeTopic" class="grow" placeholder="e.g. monochrome outfits, 1 polo 5 outfits, colours for wheatish skin" />
-          <button id="homeCreate" class="primary">Create reel</button>
-        </div>
-        <div class="row hero-alt">
-          <button id="homeIdeas" class="small">✨ Get trending ideas</button>
-          <span class="muted">or pick a format below</span>
-        </div>
+  <section class="hero">
+    <div class="hero-copy">
+      <div class="pill">Open source · Runs on your machine</div>
+      <h1>Type a topic.<br />Get a <em>finished</em> reel.</h1>
+      <p class="lead">An AI pipeline that writes the script, has it reviewed and rewritten, records the voice, makes the images, animates every beat, watches its own render for mistakes, and hands you a reel ready to post.</p>
+      <div class="cta">
+        <a class="btn btn-solid btn-lg" href="/studio">Make your first reel →</a>
+        <a class="btn btn-ghost btn-lg" href="#how">See how it works</a>
       </div>
+      <ul class="ticks">
+        <li>No account</li>
+        <li>No server</li>
+        <li>Works without any API keys</li>
+      </ul>
+    </div>
 
-      <div class="home-grid">
-        <div class="card">
-          <h2>Setup</h2>
-          <div id="homeStatus" class="status-list"></div>
-          <p class="muted small-print">Everything works without keys. Add keys to <code>.env</code> for a better voice and images, then restart.</p>
-        </div>
-        <div class="card">
-          <h2>Recent reels</h2>
-          <div id="homeRecent" class="recent-list"></div>
+    <div class="hero-visual">
+      <div class="phone">
+        <div class="bars"><i></i><i></i><i></i><i></i></div>
+        <div class="screen" id="screen">
+          <div class="beat" id="beat"></div>
+          <div class="swatches" id="swatches"></div>
+          <div class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
         </div>
       </div>
+      <div class="chip c1">✓ Script reviewed and rewritten</div>
+      <div class="chip c2">✓ Words synced to the voice</div>
+      <div class="chip c3">✓ Self-checked before export</div>
+    </div>
+  </section>
 
-      <h2 class="section-title">Formats</h2>
-      <div id="homeFormats" class="home-formats"></div>
+  <section class="strip">
+    <div><b>10</b><span>pipeline stages</span></div>
+    <div><b>4</b><span>reel formats</span></div>
+    <div><b>11</b><span>things the reviewer scores</span></div>
+    <div><b>0</b><span>keys needed to try it</span></div>
+  </section>
 
-      <h2 class="section-title">How a reel is made</h2>
-      <ol class="pipeline">
-        <li><b>Idea</b><span>Trends, a topic bank and past results</span></li>
-        <li><b>Script</b><span>Claude writes it beat by beat</span></li>
-        <li><b>Review</b><span>A second pass scores and rewrites it</span></li>
-        <li><b>Voice</b><span>With word timings</span></li>
-        <li><b>Images</b><span>From the library or generated</span></li>
-        <li><b>Motion</b><span>Type, layout and animation per beat</span></li>
-        <li><b>Render</b><span>Sound effects, music, ffmpeg</span></li>
-        <li><b>Self-check</b><span>Claude reviews the video and fixes it</span></li>
-      </ol>
+  <section id="how" class="section">
+    <div class="eyebrow">How it works</div>
+    <h2>From one line of text to a <em>post-ready</em> reel</h2>
+    <p class="sub">Each step hands structured data to the next, so you can stop, edit anything, and carry on.</p>
+    <ol class="flow">
+      <li><span>01</span><b>Idea</b><p>Claude suggests topics from trends, the season, a topic bank and how your past reels did. Or type your own.</p></li>
+      <li><span>02</span><b>Script</b><p>Written beat by beat as JSON: the spoken line, the words on screen, the layout, the images and the motion.</p></li>
+      <li><span>03</span><b>Writers' room</b><p>A second Claude pass scores the script, lists every problem and rewrites it until it passes.</p></li>
+      <li><span>04</span><b>Voice</b><p>Text-to-speech with timings for every word, so the words on screen land exactly when they're spoken.</p></li>
+      <li><span>05</span><b>Images</b><p>Pulled from your tagged library or generated, with the background removed and the colour checked.</p></li>
+      <li><span>06</span><b>Design and motion</b><p>Each beat gets a layout, type, palette and animation, then it's drawn frame by frame.</p></li>
+      <li><span>07</span><b>Sound and render</b><p>Sound effects on the visual hits, music ducked under the voice, mixed to Instagram loudness.</p></li>
+      <li><span>08</span><b>Self-check</b><p>Claude watches contact sheets of the finished video, fixes what's wrong and rebuilds.</p></li>
+    </ol>
+  </section>
 
-      <h2 class="section-title">Tools</h2>
-      <div class="home-tools">
-        <button class="tool" data-go="stylesBtn"><b>🎓 Learn from a reel</b><span>Upload a reel you like and get a reusable style card</span></button>
-        <button class="tool" data-go="motionsBtn"><b>🎬 Motion library</b><span>Preview and rate every animation</span></button>
-        <button class="tool" data-go="libraryBtn"><b>🖼 Asset library</b><span>Your images, and the ones reels still need</span></button>
-        <button class="tool" data-go="instagramBtn"><b>📈 Instagram</b><span>Pull real stats back into new ideas</span></button>
-      </div>
-    </section>
+  <section id="features" class="section">
+    <div class="eyebrow">Features</div>
+    <h2>Everything a reel needs, <em>in one place</em></h2>
+    <div class="grid">
+      <article class="feature">
+        <div class="icon">✍️</div>
+        <h3>A writers' room, not one shot</h3>
+        <p>A reviewer scores the hook, specificity, proof, retention, flow, accuracy, visuals and the call to action, then sends the script back for a rewrite. Your own notes count as top-priority fixes.</p>
+      </article>
+      <article class="feature">
+        <div class="icon">🎙️</div>
+        <h3>Word-synced voice</h3>
+        <p>Hinglish or English voices from Sarvam or ElevenLabs, or the free macOS voice. Numbers and tricky words are made speakable first, and audio is cached so rebuilds are free.</p>
+      </article>
+      <article class="feature">
+        <div class="icon">🖼️</div>
+        <h3>A smart image library</h3>
+        <p>Models, garments and props are tagged and reused. Missing ones are generated, cut out and recoloured to an exact hex. A reference photo keeps the same person across every pose.</p>
+      </article>
+      <article class="feature">
+        <div class="icon">🎬</div>
+        <h3>A motion design system</h3>
+        <p>Kinetic type lockups, colour wipes, photo cards, flows, giant words behind a model and letter fly-throughs. Motions are plugins you can preview and rate.</p>
+      </article>
+      <article class="feature">
+        <div class="icon">🔍</div>
+        <h3>It checks its own work</h3>
+        <p>After rendering, Claude looks for text over faces, cut-off or unreadable words, overlaps, empty frames and wrong colours, then fixes them before you ever see the reel.</p>
+      </article>
+      <article class="feature">
+        <div class="icon">🎓</div>
+        <h3>Learn from any reel</h3>
+        <p>Upload a reel you love. The engine measures its cuts, colours and sound hits, and Claude writes a style card. New reels borrow its ingredients without copying it.</p>
+      </article>
+      <article class="feature">
+        <div class="icon">📈</div>
+        <h3>Learns from your results</h3>
+        <p>Connect Instagram to pull views, saves, shares and watch time for every reel. Those numbers shape the next round of ideas.</p>
+      </article>
+      <article class="feature">
+        <div class="icon">🎞️</div>
+        <h3>Finish it anywhere</h3>
+        <p>Every reel comes with a cover, caption, subtitles and voice track. Export layered tracks and an .fcpxml timeline straight into DaVinci Resolve.</p>
+      </article>
+    </div>
+  </section>
 
-    <section id="newView">
-      <div class="row between">
-        <h1>Style rules</h1>
-        <button id="ideasBtn" class="primary">✨ Get trending ideas</button>
-      </div>
-      <p class="muted">Ideas are researched from what's trending now, the season and upcoming festivals, and your channel's style. Pick one and hit <b>Create reel</b>: the script, typography, colours, voice and images start generating, and the reel asks you for anything it can't make itself.</p>
-      <div id="newMsg" class="muted"></div>
+  <section id="formats" class="section">
+    <div class="eyebrow">Formats</div>
+    <h2>Four looks, <em>out of the box</em></h2>
+    <div class="formats">
+      <article class="format">
+        <div class="art art-editorial"><small>STOP WEARING</small><em>brown</em><strong>WITH BLACK</strong></div>
+        <h3>Style rules</h3>
+        <p>Magazine-style kinetic typography, colour boards and cutout models. Hinglish.</p>
+      </article>
+      <article class="format">
+        <div class="art art-aesthetic"><div class="model"></div><span>the <em>quiet</em> fit</span></div>
+        <h3>Aesthetic</h3>
+        <p>A calm studio look where one model's outfit changes in place. English.</p>
+      </article>
+      <article class="format">
+        <div class="art art-fit"><div class="mirror"></div><b>Comment LINK</b></div>
+        <h3>AI fit</h3>
+        <p>A mirror-selfie outfit on an AI model, with a "Comment LINK" sticker.</p>
+      </article>
+      <article class="format">
+        <div class="art art-tips"><span>3 mistakes that make you look <u>short</u></span></div>
+        <h3>Quick tips</h3>
+        <p>Tips over stock or AI clips with word-by-word captions.</p>
+      </article>
+    </div>
+  </section>
 
-      <div id="manualIdeas" class="card" hidden>
-        <strong>Get ideas with claude.ai</strong> <span class="muted">(until Claude Code is installed)</span>
-        <ol class="steps">
-          <li><button id="copyIdeasPrompt" class="small">Copy ideas prompt</button> and paste it into <a href="https://claude.ai/new" target="_blank" rel="noopener">claude.ai</a> (turn on web search there for trends).</li>
-          <li>Paste Claude's whole reply here:<textarea id="ideasReply" rows="4" placeholder="Paste the reply (JSON)..."></textarea></li>
-        </ol>
-        <button id="importIdeas" class="small">Show ideas</button>
-      </div>
+  <section class="section split">
+    <div>
+      <div class="eyebrow">What you get</div>
+      <h2>A complete pack, <em>ready to post</em></h2>
+      <p class="sub">Every reel lands in its own folder with everything you need to post it or keep editing.</p>
+    </div>
+    <ul class="files">
+      <li><code>rough-cut.mp4</code><span>The finished reel, 1080×1920</span></li>
+      <li><code>cover.png</code><span>A designed grid cover</span></li>
+      <li><code>caption.txt</code><span>Caption and hashtags</span></li>
+      <li><code>captions.srt</code><span>Subtitles to restyle anywhere</span></li>
+      <li><code>voiceover.mp3</code><span>The voice track alone</span></li>
+      <li><code>davinci/</code><span>Layered tracks and an .fcpxml timeline</span></li>
+    </ul>
+  </section>
 
-      <div id="ideas" class="ideas"></div>
+  <section class="section split">
+    <div>
+      <div class="eyebrow">Local-first</div>
+      <h2>Your machine. Your keys. <em>Your reels.</em></h2>
+      <p class="sub">There's nothing to sign up for. Your images never leave your computer. Every service is optional and has a free fallback, so you can try the whole pipeline before you spend anything.</p>
+    </div>
+    <table class="keys">
+      <tr><th>Piece</th><th>With a key</th><th>Without</th></tr>
+      <tr><td>Scripts</td><td>Claude API</td><td>Claude Code on your subscription, or copy/paste via claude.ai</td></tr>
+      <tr><td>Voice</td><td>Sarvam or ElevenLabs</td><td>Free macOS voice</td></tr>
+      <tr><td>Images</td><td>Gemini or Cloudflare FLUX.2</td><td>Free generator</td></tr>
+      <tr><td>Stock clips</td><td>Pexels</td><td>AI images</td></tr>
+    </table>
+  </section>
 
-      <div class="card">
-        <h2>Or your own topic</h2>
-        <div class="row">
-          <input id="topic" class="grow" placeholder="e.g. monochrome outfits, what to wear to a Diwali party" />
-          <button id="createOwn" class="primary">Create reel</button>
-        </div>
-      </div>
+  <section id="start" class="section start">
+    <div class="eyebrow">Get started</div>
+    <h2>Up and running in <em>two minutes</em></h2>
+    <p class="sub">Needs Node 20+ and ffmpeg. Works best on macOS.</p>
+    <pre class="terminal"><span class="dim"># clone and install</span>
+git clone https://github.com/DeepakKohlii/ai-reel-engine.git
+cd ai-reel-engine
+npm install
 
-      <div id="manualCreate" class="card" hidden>
-        <strong>Create "<span id="manualTopic"></span>" with claude.ai</strong>
-        <ol class="steps">
-          <li>The script prompt is copied. Paste it into <a href="https://claude.ai/new" target="_blank" rel="noopener">claude.ai</a> and send.</li>
-          <li>Paste Claude's whole reply here:<textarea id="reply" rows="5" placeholder="Paste the reply (JSON)..."></textarea></li>
-        </ol>
-        <div class="row"><button id="importBtn" class="primary">Create reel</button><span id="manualMsg" class="muted"></span></div>
-      </div>
+<span class="dim"># start, then open http://localhost:4747</span>
+npm start</pre>
+    <div class="cta center">
+      <a class="btn btn-solid btn-lg" href="/studio">Open the studio →</a>
+      <a class="btn btn-ghost btn-lg" href="https://github.com/DeepakKohlii/ai-reel-engine" target="_blank" rel="noopener">Star on GitHub</a>
+    </div>
+  </section>
 
-      <details class="other-formats">
-        <summary class="muted">Other formats (AI fit, Quick tips)</summary>
-        <div id="formatCards" class="formats"></div>
-        <textarea id="notes" rows="2" placeholder="Notes" hidden></textarea>
-        <p class="hint">Pick a format, type the topic above and click Create reel.</p>
-      </details>
-    </section>
+  <section class="section faq">
+    <div class="eyebrow">FAQ</div>
+    <h2>Questions</h2>
+    <details><summary>Do I need to pay for anything?</summary><p>No. Without keys it uses Claude Code (or claude.ai copy/paste), the free macOS voice and a free image generator. Keys only make the voice and images better.</p></details>
+    <details><summary>Which Claude do I need?</summary><p>Any of three: an Anthropic API key, the Claude Code CLI logged in with your Claude subscription, or plain claude.ai, where the studio gives you the prompt to paste.</p></details>
+    <details><summary>Is it only for fashion?</summary><p>The built-in formats and prompts are tuned for men's style reels, but the pipeline (script, review, voice, images, motion, render, self-check) is general. New formats are folders in <code>src/formats/</code>.</p></details>
+    <details><summary>Does it post to Instagram for me?</summary><p>No. It makes the reel, cover and caption, and you post it. With Instagram connected, it reads each reel's stats to plan better ideas.</p></details>
+    <details><summary>Can I edit what it makes?</summary><p>Yes. Every field of the script is editable in the studio, there's a raw JSON editor, and you can swap any image. Only what you changed is rebuilt.</p></details>
+  </section>
 
-    <section id="packView" hidden>
-      <div class="row between">
-        <div>
-          <span id="packFormat" class="badge"></span>
-          <h1 id="packTitle"></h1>
-        </div>
-        <div class="row">
-          <button id="saveBtn">Save edits</button>
-          <button id="polishBtn" hidden title="Editor reviews the script and Claude rewrites it (2-6 min)">✍️ Polish script</button>
-          <button id="selfCheckBtn" hidden title="Claude checks every beat and fixes what it safely can">🔍 Self-check</button>
-          <button id="davinciBtn" hidden>Export for DaVinci</button>
-          <button id="buildBtn" class="primary" title="Free draft voice">Build reel</button>
-          <button id="finalVoiceBtn" hidden title="Records the paid ElevenLabs voice. Only when the script is final.">🎙 Record final voice</button>
-        </div>
-      </div>
-      <p id="packAngle" class="muted"></p>
-      <p id="voiceState" class="hint" hidden></p>
-      <div class="card script-review" id="scriptCard" hidden></div>
-      <div class="card review" id="qaCard" hidden></div>
-      <div class="card review" id="reviewCard" hidden></div>
-      <div class="card" id="resultsCard" hidden></div>
-      <div class="card" id="packNeedsCard" hidden>
-        <h2>This reel needs from you <span id="packNeedsCount" class="muted"></span></h2>
-        <p class="hint">Everything else is generated automatically. Make these in the Gemini or ChatGPT app with the prompt, drop the image on the card, then click Build reel again.</p>
-        <div id="packNeeds" class="needs"></div>
-      </div>
+  <footer>
+    <div><a class="logo" href="/"><span>▶</span> Reel Engine</a><p>Open-source AI reel pipeline.</p></div>
+    <div class="links">
+      <a href="/studio">Studio</a>
+      <a href="https://github.com/DeepakKohlii/ai-reel-engine" target="_blank" rel="noopener">GitHub</a>
+      <a href="#how">How it works</a>
+    </div>
+  </footer>
 
-      <div class="grid">
-        <div>
-          <div class="card" id="imagesCard" hidden>
-            <h2>Images in this reel</h2>
-            <p class="hint">Don't like one? <b>Regenerate</b> it, edit its prompt, drop in your own image (a product photo or one from the Gemini app), or copy the prompt for Gemini. Then click Build reel.</p>
-            <div id="reelImages" class="reel-images"></div>
-          </div>
-          <div class="card" id="mediaCard" hidden>
-            <h2>Photos &amp; clips <span id="mediaCount" class="muted"></span></h2>
-            <p class="hint">Filled automatically on Build: real clips come from Pexels (free to use), photos are made fresh by AI from the description (never copied, no real faces). Replace any of them by uploading or dropping your own on its card. AI clips need an image-to-video app: copy their prompt.</p>
-            <div id="reelMedia" class="reel-images"></div>
-          </div>
-          <div id="editor"></div>
-          <div class="card">
-            <h2>Post caption</h2>
-            <textarea id="caption" rows="8"></textarea>
-            <div class="row">
-              <label class="grow">Hashtags (3-5, space separated)<input id="hashtags" /></label>
-              <label>Comment keyword<input id="keyword" /></label>
-            </div>
-            <div class="row">
-              <button id="copyCaptionBtn">📋 Copy caption + hashtags</button>
-              <input id="captionNotes" class="grow" placeholder="Notes for a rewrite (optional)" />
-              <button id="rewriteCaptionBtn">✍️ Rewrite caption</button>
-              <span id="captionMsg" class="hint"></span>
-            </div>
-          </div>
-          <details class="card">
-            <summary><strong>Advanced: edit the raw script JSON</strong></summary>
-            <textarea id="rawJson" rows="16" class="mono"></textarea>
-            <div class="row"><button id="applyJson" class="small">Apply JSON</button><span id="jsonMsg" class="muted"></span></div>
-          </details>
-        </div>
-
-        <div class="side">
-          <div class="card" id="statusCard">
-            <h2>Progress</h2>
-            <div id="stepLine" class="muted">Not built yet.</div>
-            <pre id="log"></pre>
-          </div>
-          <div class="card" id="outputCard" hidden>
-            <h2>Reel</h2>
-            <video id="player" controls playsinline></video>
-            <div class="row" id="playerSwitch" hidden>
-              <button class="small" data-src="rough-cut.mp4">Clean (to post)</button>
-              <button class="small" data-src="preview-with-music.mp4">With music (preview)</button>
-            </div>
-            <div class="links" id="links"></div>
-            <div id="coverBox" hidden>
-              <h2>Cover</h2>
-              <img id="coverImg" class="cover" alt="Reel cover" />
-              <div id="coverPrompt"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="stylesView" hidden>
-      <h1>Learn from a reel</h1>
-      <p class="muted">Upload a reel you like, from any niche. The engine studies its typography, colours, stickers, animations, pacing, sound effects and script shape, and keeps only what suits your channel and looks good (it skips anything odd, overkill or specific to their content) as ingredients. New reels keep their own look and borrow one to three ingredients for the frames where they fit, so your reels stay yours but keep getting fresher. (For a trial you can copy a style's whole format.)</p>
-      <form id="learnForm" class="card">
-        <h2>Add a reel to learn from</h2>
-        <label>The reel's video file (save it or screen-record it on your phone; the file lets the engine hear the sound design too)
-          <input type="file" name="file" accept="video/*" required /></label>
-        <label>Link (optional, for your reference)<input name="link" placeholder="https://www.instagram.com/reel/..." /></label>
-        <label>What do you like about it? (optional)<input name="notes" placeholder="e.g. the comment sticker and its sound, the typography, the fast cuts" /></label>
-        <div class="row"><button class="primary" type="submit">🎓 Learn this style</button><span id="learnMsg" class="hint"></span></div>
-      </form>
-      <div id="stylesList"></div>
-    </section>
-
-    <section id="aestheticView" hidden>
-      <h1>Aesthetic reels</h1>
-      <p class="muted">Calm, magazine-grade English reels: one quiet background, one model whose outfit changes, and small precise graphics on every word. Same flow as always: the script first (you approve it), then the plan, images (the same man in every outfit), the free draft voice and the render. The paid voice only when you click Record final voice.</p>
-      <form id="aestheticForm" class="card">
-        <h2>New aesthetic reel</h2>
-        <label>Topic<input name="topic" required placeholder="e.g. shoes for baggy jeans, colour temperature, how a shirt should fit" /></label>
-        <label>Notes (optional)<input name="notes" placeholder="e.g. make it a which-looks-better, 3 sections, for broad guys" /></label>
-        <div class="row"><button class="primary" type="submit">Write the script</button><span id="aestheticMsg" class="hint"></span></div>
-      </form>
-      <details class="card">
-        <summary>Series settings</summary>
-        <label>Series name (cover + sign-off)<input id="aesSeries" /></label>
-        <label>Last line of guides<input id="aesSignoff" /></label>
-        <div class="row"><button id="aesSave">Save</button><span id="aesSettingsMsg" class="hint"></span></div>
-      </details>
-      <div id="aestheticList"></div>
-    </section>
-
-    <section id="instagramView" hidden>
-      <h1>Instagram</h1>
-      <div id="igBody"></div>
-    </section>
-
-    <section id="motionsView" hidden>
-      <div class="row between">
-        <h1>Motion library</h1>
-        <button id="motionPreviewsBtn">Render missing previews</button>
-      </div>
-      <p class="muted">Every animation the engine can use, with a short sample clip (library images, sound effects on, no voice). Rate them: <b>Like</b> ones get used where they fit, <b>Never</b> ones are never used, and new motions stay <b>on trial</b> (at most one per reel) until you rate them. The engine picks from here for each reel and avoids repeating what recent reels used.</p>
-      <div id="motionMsg" class="hint"></div>
-      <div id="motionList"></div>
-    </section>
-
-    <section id="libraryView" hidden>
-      <h1>Asset library</h1>
-      <p class="muted">Cutout images reused across reels. Backgrounds are removed automatically. Real product photos and images from better free AI tools (Gemini, ChatGPT) look far better than the built-in generator, so upload those whenever you can. Tags are how reels find them (e.g. <code>model, olive, overshirt</code> or <code>tshirt, tee</code>).</p>
-      <div class="card" id="needsCard">
-        <div class="row between">
-          <h2>Images your reels need <span id="needsCount" class="muted"></span></h2>
-        </div>
-        <p class="hint">Make these in the Gemini or ChatGPT app (free) for the best quality: click <b>Copy prompt</b>, paste it there (for host poses, also attach the host reference photo), download the image, and drop it on the card. It's cut out, tagged and used in your reels automatically. "Upgrade" means a low-quality free-AI version is standing in for now.</p>
-        <div id="needs" class="needs"></div>
-      </div>
-      <div class="grid2">
-        <form id="uploadForm" class="card">
-          <h2>Upload an image</h2>
-          <input type="file" name="file" accept="image/*" required />
-          <p class="hint">Host = the same faceless guy in the same outfit, one image per pose. Tag each with <code>host</code> and the pose: <code>host, pointing</code>, <code>host, thinking</code>, <code>host, holding phone</code>... Make a set once in Gemini or ChatGPT from one reference photo so he stays consistent.</p>
-          <div class="row">
-            <label class="grow">Kind
-              <select name="kind"><option value="item">Garment / shoe</option><option value="model">Model (person in an outfit)</option><option value="host">Host (the channel's presenter)</option><option value="prop">Prop</option></select>
-            </label>
-            <label class="grow">Tags<input name="tags" placeholder="tshirt, tee, white" /></label>
-          </div>
-          <label class="check"><input type="checkbox" name="keepBackground" value="true" /> Keep the background (don't cut out)</label>
-          <div class="row"><button class="primary">Upload</button><span class="muted msg"></span></div>
-        </form>
-        <form id="generateForm" class="card">
-          <h2>Generate with free AI</h2>
-          <textarea name="prompt" rows="3" placeholder="a plain crew neck cotton t-shirt, light grey" required></textarea>
-          <div class="row">
-            <label class="grow">Kind
-              <select name="kind"><option value="item">Garment / shoe</option><option value="model">Model (person in an outfit)</option><option value="host">Host (the channel's presenter)</option><option value="prop">Prop</option></select>
-            </label>
-            <label class="grow">Tags<input name="tags" placeholder="tshirt, tee" /></label>
-          </div>
-          <div class="row">
-            <label class="grow">Reference image 0<select class="ref"></select></label>
-            <label class="grow">Reference image 1<select class="ref"></select></label>
-          </div>
-          <p class="hint">With Cloudflare set up, references keep things consistent: "the same man as image 0, now pointing up", or try-on: "the man from image 0 wearing the shirt from image 1". Host poses automatically use the ★ host reference.</p>
-          <div class="row"><button class="primary">Generate</button><span class="muted msg"></span></div>
-        </form>
-      </div>
-      <div id="assetGrid" class="assets"></div>
-    </section>
-  </main>
-
-  <script src="app.js" type="module"></script>
+  <script>
+    const beats = [
+      { bg: "#efe6d6", ink: "#1b1712", accent: "#8a5a2b", lines: [["s", "STOP WEARING"], ["i", "brown"], ["c", "WITH BLACK"]] },
+      { bg: "#2a1f19", ink: "#f3ebe0", accent: "#e9c46a", lines: [["s", "try this"], ["i", "instead"]], swatches: ["#1f3a5f", "#d9cbb4", "#f3ebe0"] },
+      { bg: "#f6dd7a", ink: "#1b1712", accent: "#c2410c", lines: [["s", "the 3-colour"], ["c", "RULE"], ["k", "SAVE THIS"]] },
+      { bg: "#1f2a44", ink: "#f3ebe0", accent: "#f6dd7a", lines: [["s", "comment"], ["c", "LIST"], ["i", "for all 7 fits"]] },
+    ];
+    let n = 0;
+    const screen = document.getElementById("screen");
+    const beat = document.getElementById("beat");
+    const sw = document.getElementById("swatches");
+    const bars = document.querySelectorAll(".bars i");
+    function play() {
+      const b = beats[n % beats.length];
+      screen.style.background = b.bg;
+      screen.style.color = b.ink;
+      screen.style.setProperty("--accent", b.accent);
+      beat.innerHTML = b.lines.map(([k, t], i) => `<div class="w w-${k}" style="animation-delay:${i * 0.35}s">${t}</div>`).join("");
+      sw.innerHTML = (b.swatches || []).map((c, i) => `<i style="background:${c};animation-delay:${0.8 + i * 0.15}s"></i>`).join("");
+      bars.forEach((el, i) => el.className = i < n % beats.length ? "done" : i === n % beats.length ? "on" : "");
+      n++;
+    }
+    play();
+    setInterval(play, 2600);
+  </script>
 </body>
 </html>

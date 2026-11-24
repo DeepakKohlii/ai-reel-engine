@@ -1572,7 +1572,6 @@ function flash(btn, text) {
 
 $("#newBtn").onclick = showNew;
 $("#homeBtn").onclick = showHome;
-$("#brandBtn").onclick = showHome;
 $("#homeCreate").onclick = homeCreate;
 $("#homeTopic").addEventListener("keydown", (e) => e.key === "Enter" && homeCreate());
 $("#homeIdeas").onclick = async () => {
