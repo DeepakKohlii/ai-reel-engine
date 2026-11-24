@@ -1,0 +1,20 @@
+node_modules/
+.env
+packs/
+assets/music/*
+!assets/music/README.md
+.DS_Store
+# Large/generated assets (models, image library, motion previews, sfx cache, voice tests)
+assets/models/
+assets/library/
+assets/motions/*.mp4
+assets/sfx/.built/
+assets/references/
+voice-samples/
+*.log
+__pycache__/
+*.pyc
+assets/motions/scenes.txt
+assets/motions/.fxcache/
+assets/styles/*/sheet-*.png
+__pycache__/

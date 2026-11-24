@@ -1,0 +1,213 @@
+{
+  "id": "style-5beac773b7",
+  "name": "Monochrome Lyric Slam",
+  "created": 1790355274065,
+  "active": true,
+  "uses": 3,
+  "source": {
+    "duration": 14.7
+  },
+  "sheets": [],
+  "card": {
+    "name": "Monochrome Lyric Slam",
+    "summary": "A rap lyric video in a kinetic-typography poster style. It is shot inside a roughly 4:5 light-grey window with black letterbox bars above and below. Black-and-white cutouts of one person keep changing pose and size. Each line is set in heavy condensed caps using just two inks, near-black navy and one hot red. Punchline words get so big they bleed off the frame and sit behind the subject, and the camera flies through a giant letter. The only colour in the reel is the red type, one red plinth and one vintage film poster. Almost every beat is a hard cut or a scale jump, with no transitions and no sound effects. The music drives everything.",
+    "typography": {
+      "fonts": [
+        {
+          "role": "hero word",
+          "look": "Ultra-heavy condensed grotesque in caps with tight tracking and a tall x-height, like Druk or Anton. Set in red #E1252C. It fills 90–130% of the frame width, so it is cropped at the frame edges (e.g. 'DOBARA', a giant cropped 'KHEECHE', a cropped 'GOAT').",
+          "closest_ours": "Anton",
+          "google_font": "Anton"
+        },
+        {
+          "role": "small words",
+          "look": "The same condensed bold grotesque in caps, set in dark navy #1F2230, about 6–8% of frame height. It carries the lead-in words before the red hero word ('JAISE', 'MUJHSE', 'WHERE THEY FIRE UP', 'MAI WAHA SE HUN'). It is slightly narrower and lighter than the hero word, like Oswald Bold or Bebas Neue.",
+          "closest_ours": "Oswald SemiBold",
+          "google_font": "Oswald"
+        },
+        {
+          "role": "caption",
+          "look": "A tiny condensed caps tag at about 3% of frame height, placed just before the hero word ('JUST' before 'QUIET', 'AND IF I'). Same family, dark navy.",
+          "closest_ours": "Bebas Neue",
+          "google_font": "Bebas Neue"
+        },
+        {
+          "role": "label",
+          "look": "A ghost preview word: the next lyric word in the same condensed caps, but pale grey (#9A9EA6 to #B8BCC2) at about 30–40% opacity. It sits beside the subject before it 'lights up' ('UNKA', 'MAI', 'AA').",
+          "closest_ours": "Oswald",
+          "google_font": "Oswald"
+        }
+      ],
+      "layout": "All text is in caps. Lines are left-aligned in blocks placed in the upper 15–45% of the content window, so the cutout has the lower half. There are 1–4 words on screen at once, usually 2 lines. Line 1 is small and dark, line 2 is the red hero word at 2–3× the size. Sometimes the colours flip within one line (dark 'JAISE' + red 'KAAM KAAJ'), and sometimes the hero word is dark navy ('NAHI!'). On punchlines the hero word is scaled until it bleeds off both sides and sits at the very top edge, cropped by the frame. The subject stands in front of it and covers its bottom, so the word is the backdrop. The text block is sometimes offset left of the subject ('AGAR KARUN' at the left edge of his head) and sometimes centred over him ('THE STOVE' over the prop).",
+      "effects": "Flat fills with no stroke, no drop shadow and no boxes. Colour is set per word: dark navy #1F2230 plus one accent red #E1252C. The hero word is often layered behind the cutout for depth. Ghost words are low-opacity grey. There is a very light RGB-split/chromatic fringe on fast moves (cyan/red edge at 0.3s and 1.1s) and a slight motion blur on scale jumps. On the giant 'B' fly-through, the letter becomes a black mask and the subject shows through its counters.",
+      "animation": "Word-by-word karaoke timing locked to the rap at about 5 words/sec. Each word snaps on as its syllable lands, in about 1–2 frames with no fade. The line builds left to right, then the next line appears under it. Hero words arrive with a fast scale-down punch (from about 130% to 100% in 3–4 frames) and a small overshoot. Ghost words sit pale and then flip to full ink on their beat. On line changes the whole block does not fade out. It either hard cuts or the camera scales past it: at 1.1s there is a fly-through where one letter of the word scales to 1000% until its black bowl wipes the screen. Some cuts rotate the camera a few degrees and push in on a word (the tilted 'RAHE THE / ADA' at 4.3s). Words leave by being cropped off the edge as the camera zooms, or by the next cut."
+    },
+    "colors": {
+      "palettes": [
+        {
+          "name": "Studio grey poster: cool light-grey seamless backdrop with a soft vignette toward the edges, black letterbox bars, desaturated B&W cutouts, one red accent",
+          "bg": "#DDE3E6",
+          "accent": "#E1252C",
+          "text": "#1F2230"
+        },
+        {
+          "name": "Letterbox frame: pure black bars take about 13% top and 13% bottom, so the content is a 4:5 window",
+          "bg": "#000000",
+          "accent": "#E1252C",
+          "text": "#DDE3E6"
+        },
+        {
+          "name": "Colour break: a full-colour vintage 80s Bollywood film-poster insert (warm oranges and browns) that breaks the monochrome for one beat",
+          "bg": "#C8702E",
+          "accent": "#E1252C",
+          "text": "#F2E6CC"
+        }
+      ],
+      "usage": "The background is the same cool light grey (#DDE3E6 to #CCDDDD) all the way through, with no colour changes between sections, and every cutout is converted to black and white. Red is the only saturated colour and marks the hero or punch word in about 70% of lines. It also shows up once as a prop, a red cube plinth with white smoke under the subject at 12.3s. Dark navy carries the connective words. Full colour is saved for one surprise insert (the vintage poster). For a fashion version, keep the garments B&W and let red be the only colour. Or allow one garment in full colour as the 'colour break' beat."
+    },
+    "visual_devices": [
+      {
+        "name": "Hero word behind subject (depth sandwich)",
+        "how": "A giant red condensed word spans the full width at the top of the frame, cropped at both sides. A B&W cutout stands in front and hides its lower part.",
+        "when": "Punchlines and rhyme-end words ('DOBARA', 'GOAT', 'KHEECHE').",
+        "engine": "have"
+      },
+      {
+        "name": "Letter fly-through transition",
+        "how": "The camera scales into one giant black letter of the current word (the 'B'). The subject can be seen through the letter's counters, then the black glyph fills the frame and the next shot appears. It takes about 0.3–0.5s with an ease-in scale of about 1×→12×.",
+        "when": "Changing between lines and outfits on a stressed word.",
+        "engine": "have"
+      },
+      {
+        "name": "Ghost preview word",
+        "how": "The next word shows pale grey at about 35% opacity next to the subject, then snaps to full navy or red when it is spoken.",
+        "when": "Just before a key word, to build anticipation.",
+        "engine": "have"
+      },
+      {
+        "name": "Scale-jump punch-in on cutout",
+        "how": "The same B&W cutout jumps from full-body (about 50% of frame height) to an extreme crop (face or jacket filling 120% of the frame) on the beat, with a slight motion blur. Then it cuts back out to a new wide pose.",
+        "when": "Every 2–4 beats, often on the word after a hero word (5.3s, 9.1s, 10.9s).",
+        "engine": "have"
+      },
+      {
+        "name": "Multi-pose cutout cast",
+        "how": "A new cutout of the same person in a different outfit and pose appears on almost every line. It is placed at different sizes (tiny figure at 20% height, mid-shot, close-up) and sometimes two at different scales in one frame (a small figure next to the big one at 0.3s, and a small figure sitting on a big close-up's shoulder at 4.3s).",
+        "when": "Each lyric line gets a new look. For a fashion channel, this maps to one outfit per line.",
+        "engine": "have"
+      },
+      {
+        "name": "Tiny-figure-on-giant-figure scale play",
+        "how": "A small full-body cutout sits or stands on the shoulder of a huge close-up cutout of the same person.",
+        "when": "Moments about status or dominance.",
+        "engine": "have"
+      },
+      {
+        "name": "Letterbox 4:5 window",
+        "how": "Black bars at the top and bottom (about 13% each) frame a grey stage, which gives a cinematic, poster-like look.",
+        "when": "The whole reel.",
+        "engine": "have"
+      },
+      {
+        "name": "Chromatic fringe on motion",
+        "how": "A small RGB split (2–4px, cyan/red) on edges during fast scale moves.",
+        "when": "Scale jumps and the fly-through.",
+        "engine": "have"
+      }
+    ],
+    "transitions": [
+      {
+        "name": "Hard cut on beat",
+        "how": "A straight cut to a new pose or outfit, with the type block reset.",
+        "timing": "9 cuts in 14.7s, about every 0.7–2s, always on a kick or snare."
+      },
+      {
+        "name": "Letter fly-through",
+        "how": "Scale into a black letter until its fill covers the frame, then reveal the next shot.",
+        "timing": "About 0.4s, ease-in, used once near the start (0.9–1.7s)."
+      },
+      {
+        "name": "Punch zoom",
+        "how": "A 2–3× instant scale on the same cutout with a 2–3 frame motion blur. The text crops off the edges.",
+        "timing": "About 0.1–0.15s, 3–4 times per reel."
+      }
+    ],
+    "pacing": {
+      "avg_shot_seconds": 1.34,
+      "words_per_second": 4.97,
+      "notes": "This is a lyric video, so every word is timed to a rap syllable, with about 5 words per second on screen. Inside a shot there is a visual change about every 0.5–1s (a new word, a zoom or a ghost word lighting up). There is never a static moment longer than about 1.2s. Each shot usually carries 2–6 words, and the scene changes on each bar ending."
+    },
+    "sound": {
+      "music": "Hard Desi hip-hop or rap track at full level. It is the whole soundtrack, with no separate voiceover. Mean loudness is about -14.5 LUFS, and there is a thump or kick on the first frame at 0.15s.",
+      "voice": "Rapped vocals in Hinglish (from the song), not narration. For the fashion engine, use a punchy, rhythmic Hinglish VO or a beat-synced track and time the text to it.",
+      "sfx_rules": [
+        {
+          "event": "hook",
+          "sound": "boom",
+          "how": "One low thump on the first frame (about 96% low frequency, 0.17s) together with the first cutout and words."
+        },
+        {
+          "event": "cut",
+          "sound": "none",
+          "how": "Cuts land on the music's own drums, with no added SFX."
+        },
+        {
+          "event": "hero_word",
+          "sound": "none",
+          "how": "The hero word's punch-scale is timed to the snare or kick instead of an SFX."
+        },
+        {
+          "event": "image_in",
+          "sound": "none",
+          "how": "Cutouts appear silently, on the beat."
+        },
+        {
+          "event": "color_change",
+          "sound": "none",
+          "how": "There are no colour changes."
+        },
+        {
+          "event": "punchline",
+          "sound": "whoosh",
+          "how": "Optional: one soft whoosh under the letter fly-through only, low in the mix. The source has none that can be heard."
+        }
+      ],
+      "density": "subtle",
+      "notes": "There is almost no SFX layer: 9 sudden sounds, and all but the opening thump are the track's own drums. The style depends on cutting to the beat, not on sound effects. The engine should find the music's beat grid and snap cuts, word pops and punch zooms to it, with SFX turned off or nearly off."
+    },
+    "script": {
+      "hook": "It opens straight into the first bar with no intro card. The first words are on screen on frame 1 next to a confident full-body pose, plus a boom on the first frame.",
+      "structure": "Line-by-line lyric flow. Each bar gets its own shot and a new outfit or pose. The rhyme-end or stressed word of each bar becomes the red hero word, often huge and behind the subject. About every third bar gets a literal visual pun (a prop or meme image). The reel ends on a line with a literal prop image.",
+      "cta": "None in the source. For the engine, add the 'Save karo' sticker and the comment keyword after about 60% of the reel, but style them in the same two inks (red word, navy small word) so they don't break the poster look.",
+      "tone": "Swaggering, confident, street-luxe and cinematic. Monochrome editorial feel with a hip-hop attitude."
+    },
+    "engine_settings": {
+      "typeset": "poster",
+      "motions": [
+        "snap",
+        "slam",
+        "stack",
+        "mask"
+      ],
+      "layouts": [
+        "sandwich",
+        "hero",
+        "closeup",
+        "edge",
+        "float"
+      ],
+      "sticker": "Keep it minimal: a flat red #E1252C rectangle with condensed white caps (Anton), or just a red word with a dark navy lead-in word, with no tilt and no shadow. It should snap in on a beat (1 frame, 110%→100%) and park at the bottom left of the 4:5 window. The comment keyword appears as a giant red hero word behind the cutout, not as a cartoon sticker.",
+      "textures": "No paper textures. Use a cool light-grey seamless studio backdrop (#DDE3E6) with a soft radial vignette, very light film grain (about 3%), a slight softness or bloom, black letterbox bars, and all cutouts desaturated to B&W with lifted contrast.",
+      "look": {
+        "frame": "letterbox",
+        "cutouts": "mono",
+        "ghost": "yes",
+        "chroma": "yes",
+        "beat_sync": "yes"
+      },
+      "camera": "Letter fly-through once near the start; punch crops on 2-3 punchlines; giant hero words pinned to the top behind the model for the biggest words; one duo shot at most."
+    },
+    "worth_building": []
+  },
+  "lastUsed": 1790756128328
+}

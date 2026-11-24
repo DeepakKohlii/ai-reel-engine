@@ -1,0 +1,199 @@
+{
+  "id": "style-0fcd6f40f5",
+  "name": "Quiet Museum Captions",
+  "created": 1790359772910,
+  "active": true,
+  "uses": 3,
+  "source": {
+    "duration": 45
+  },
+  "sheets": [],
+  "card": {
+    "name": "Quiet Museum Captions",
+    "summary": "A calm, documentary-style explainer. Each beat shows one die-cut object centred on warm off-white paper (or pure black), with a small subtitle-sized caption underneath. The caption is plain bold sans, and one word per line switches to italic serif. Most text stays tiny and polite, so the rare full-screen hero words (a yellow word over moody footage, a deep-red word on black) and a product collage that fills the whole frame hit very hard.",
+    "typography": {
+      "fonts": [
+        {
+          "role": "caption / small words",
+          "look": "Neo-grotesk bold (Helvetica/Inter-like) with tight tracking, sentence case, near-black on cream and white on dark shots",
+          "closest_ours": "Inter Bold",
+          "google_font": "Inter Tight"
+        },
+        {
+          "role": "accent word inside caption",
+          "look": "One word per line in a high-contrast italic serif (for example 'the *craziest* glow up', '*trust*', '*Dinner*'), same cap height as the sans or slightly larger",
+          "closest_ours": "Instrument Serif Italic",
+          "google_font": "Instrument Serif"
+        },
+        {
+          "role": "hero word",
+          "look": "Huge heavy grotesk. Title case with tight negative tracking in mustard yellow over blurred footage, or ALL CAPS very heavy in deep red on black",
+          "closest_ours": "Archivo Black",
+          "google_font": "Inter Tight Black"
+        },
+        {
+          "role": "label / single keyword",
+          "look": "Small bold sans in deep brick red, a single word centred under or above the object ('Cash', 'Card', 'If')",
+          "closest_ours": "Inter Bold",
+          "google_font": "Inter"
+        }
+      ],
+      "layout": "Default caption sits centred at about 82-88% frame height. Cap height is about 2.5-3% of frame height, so it reads like a subtitle, and it shows 1-5 words at a time. Words shown on top of a photo sit dead centre at about 5% cap height, white, with no box. Hero words span 70-85% of the frame width, centred vertically, one word only. Keyword labels sit centred about 12% below the object. Tiny brand marks sit in the top corners at about 1.5% size. Everything is centre-aligned, with lots of negative space around a single object at about 20-30% of frame width.",
+      "effects": "Almost none. There are no strokes, pills or boxes. There is a very soft drop shadow on white text over photos, and the die-cut objects on cream get a faint contact shadow. Emphasis comes only from switching typeface (sans to italic serif), from colour (one deep red word, one mustard hero word) or from a jump in scale. A light film grain and a slightly warm colour grade sit over everything.",
+      "animation": "Captions build word by word in sync with the voiceover. Each word snaps or softly fades in over about 80-120 ms, and earlier words stay on screen until the line clears, so you see half-built lines like 'We starte'. A line clears with a hard cut on the next beat. Hero words land in a single frame with a bass hit, hold for 1-1.5 s, then cut. Lone keyword labels ('If', 'The') appear alone on an empty background for about 0.6-1 s as a breath before the next object arrives."
+    },
+    "colors": {
+      "palettes": [
+        {
+          "name": "Warm paper (main): off-white cream with fine grain, near-black captions, brick-red keyword",
+          "bg": "#EEEEDD",
+          "accent": "#9B1C1C",
+          "text": "#111122"
+        },
+        {
+          "name": "Sage paper (second half): pale green-cream swap for a new chapter, same inks",
+          "bg": "#DDEECC",
+          "accent": "#9B1C1C",
+          "text": "#222233"
+        },
+        {
+          "name": "Black void: single object or hero word on pure black, white captions",
+          "bg": "#000000",
+          "accent": "#B3261E",
+          "text": "#FFFFFF"
+        },
+        {
+          "name": "Mustard hero: yellow hero word over a dark, desaturated, motion-blurred shot",
+          "bg": "#333344",
+          "accent": "#D4A21A",
+          "text": "#D4A21A"
+        }
+      ],
+      "usage": "About 60% of the reel sits on the cream paper, 25% on black and 15% on full-bleed imagery. The paper colour changes once, from cream to sage, to mark the second act. Black is kept for 'reveal' beats and the ending. Red is used for single keyword labels and one big hero word only. Yellow appears once. Photos are graded low-saturation and slightly faded, and crowd shots go almost black-and-white, so the few coloured inks stand out."
+    },
+    "visual_devices": [
+      {
+        "name": "Lone object on paper",
+        "how": "One die-cut garment or accessory (no white border, faint contact shadow) centred at about 25% frame width on grain-textured cream, with a subtitle caption below. The object pops in (scale 0.9 to 1.0 over 150 ms) and drifts or scales about 3% over its hold. The next beat hard-cuts to the next object in the same spot.",
+        "when": "Each item in an evolution or list: 'first this, then this, then this'",
+        "engine": "have"
+      },
+      {
+        "name": "Italic-serif word inside a sans caption",
+        "how": "A subtitle line in Inter Bold where one word switches to Instrument Serif Italic. No colour change is needed.",
+        "when": "The emotional or ironic word of each line",
+        "engine": "have"
+      },
+      {
+        "name": "Keyword label beat",
+        "how": "The object is centred with a single brick-red bold word under it (for example the name of the look), or a single red word is left alone on empty paper for about 0.7 s",
+        "when": "Naming each option in a comparison sequence (look A, then look B, then look C)",
+        "engine": "have"
+      },
+      {
+        "name": "Rare full-frame hero word",
+        "how": "One word at 75-85% frame width, heavy grotesk. Either mustard over a dark, blurred, graded photo, or deep red ALL CAPS on pure black. It lands instantly with a boom.",
+        "when": "Only 1-2 times per reel: the twist word and the thesis word (the styling rule)",
+        "engine": "have"
+      },
+      {
+        "name": "Collage fill",
+        "how": "Die-cut products (no borders, varied scale) pop in one after another about every 100 ms. They tile edge to edge and bleed off every side until the cream is almost covered. Then the whole mosaic slides about 10% sideways and one key item lands centre-front with a caption.",
+        "when": "'You could own all of this…' abundance beat, then the one piece that matters",
+        "engine": "have"
+      }
+    ],
+    "transitions": [
+      {
+        "name": "Hard cut on the word",
+        "how": "A straight cut with no motion, timed to the first syllable of the next beat's key word. The object sits in the same centred spot on both sides of the cut, so it reads like a slideshow.",
+        "timing": "Every 1-2 s, 0 frames"
+      },
+      {
+        "name": "Paper to black flip",
+        "how": "Instant cut from cream to pure black for a reveal beat, then back. It is never a wipe.",
+        "timing": "2-3 times per reel, on a bass hit"
+      },
+      {
+        "name": "Chapter paper swap",
+        "how": "The background changes once from cream #EEEEDD to sage #DDEECC at the act break, with a hard cut",
+        "timing": "Once, around the 55-60% mark"
+      }
+    ],
+    "pacing": {
+      "avg_shot_seconds": 1.61,
+      "words_per_second": 2.96,
+      "notes": "Steady and unhurried. There is a new visual about every 1.6 s, but each frame holds only one idea. The captions build word by word, so the text is always moving even while the picture holds. There are short silent-type beats (a lone 'If' or 'The') before the payoffs. The collage section speeds up to about 0.1 s per item for 3 s, then drops back to the calm rhythm. The ending is on black with a phone or device mockup."
+    },
+    "sound": {
+      "music": "Low, minimal ambient or lo-fi piano and pads, ducked about 18 dB under the voice. The music never drives the cuts. The beat stays in the background, and it opens up slightly in the second act.",
+      "voice": "A single calm narrator, conversational and a little wry, at about 3 words/s. Clear pauses before punchlines.",
+      "sfx_rules": [
+        {
+          "event": "hook",
+          "sound": "boom",
+          "how": "One soft low boom (about 0.3 s) when the first object appears at 0.5 s"
+        },
+        {
+          "event": "hero_word",
+          "sound": "boom",
+          "how": "Deep, long sub boom (about 1 s tail) exactly on the frame where the full-frame hero word lands. This is the loudest sound in the reel."
+        },
+        {
+          "event": "color_change",
+          "sound": "boom",
+          "how": "Short low thump on each cut from paper to black or on the chapter swap, medium level"
+        },
+        {
+          "event": "image_in",
+          "sound": "pop",
+          "how": "Very short (under 0.1 s), low-mid pop when a single object pops onto the paper. This happens only on major items, not every cut."
+        },
+        {
+          "event": "list_item",
+          "sound": "pop",
+          "how": "Mid 'ding/pop' accents (0.6-1.2 s ring) on the list items in a price or option run, one per item"
+        },
+        {
+          "event": "text_word",
+          "sound": "none",
+          "how": "Caption words never get sounds"
+        }
+      ],
+      "density": "subtle",
+      "notes": "The sound effects are almost all low-end (60-95% low frequency) and there is no high-frequency whoosh at all. Hits sit on about 60% of the cuts. Nothing plays during the rapid collage fill except one pop at the end when the key item lands. This restraint is what makes it feel premium."
+    },
+    "script": {
+      "hook": "A big-picture claim framed as history or evolution, said over a single object on empty paper (for example, how an item has 'glowed up' over time)",
+      "structure": "Hook claim, then a real-world proof shot, then a chronological run of objects (one per beat with a wry one-liner each), then an abundance collage, then the twist hero word, then three price or occasion examples in the same format, then 'it was never A to B to C' with red keyword labels, then the thesis hero word on black, then a quiet ending on black",
+      "cta": "No spoken CTA. It ends on a quiet black frame with the final line. For this channel, add a small 'Save karo' sticker in a corner during the last 3 s.",
+      "tone": "Clever, understated, observational. Irony comes from the italic word, not from shouting."
+    },
+    "engine_settings": {
+      "typeset": "editorial",
+      "motions": [
+        "snap",
+        "rise",
+        "slam"
+      ],
+      "layouts": [
+        "float",
+        "hero",
+        "closeup",
+        "cards"
+      ],
+      "sticker": "Minimal: a small cream or black pill with Inter Bold text and one Instrument Serif Italic word (for example 'Save *karo*'). It fades and rises into the bottom-right corner at 85% of the way through and makes no sweep sound. The comment keyword appears as a brick-red single word with a soft pop.",
+      "textures": "Fine film grain over everything. Plain cream or sage paper with very subtle paper noise, no crumple or grid. Photos are slightly faded and warm-graded.",
+      "look": {
+        "frame": "full",
+        "cutouts": "color",
+        "ghost": "no",
+        "chroma": "no",
+        "beat_sync": "no"
+      },
+      "camera": "Mostly locked. There is a slow 3-5% push-in on held objects and photos. It uses about one punch-style instant scale jump for the collage slide. There are no rotations, fly-throughs, plinths or duos."
+    },
+    "worth_building": []
+  },
+  "lastUsed": 1790756128327
+}
