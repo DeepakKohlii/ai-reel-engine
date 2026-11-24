@@ -1,6 +1,6 @@
 {
-  "series": "Ivory & Indigo",
-  "handle": "ivoryandindigo.in",
+  "series": "Style Notes",
+  "handle": "your.handle",
   "signoff": "Save this guide and follow for more style notes.",
   "house_style": {
     "page": "#FAFAF8",
@@ -12,6 +12,6 @@
     "headline_upper": false,
     "label_font": "Plex Mono Medium",
     "pill": "outline",
-    "note": "Ivory & Indigo: a clean white page with a fine grey dot grid, a high-contrast serif like the I&I monogram, small mono labels, and indigo as the one accent. Quiet, premium, editorial; lots of white space; one model per reel built up or fixed piece by piece in place."
+    "note": "House style: a clean white page with a fine grey dot grid, a high-contrast serif monogram, small mono labels, and indigo as the one accent. Quiet, premium, editorial; lots of white space; one model per reel built up or fixed piece by piece in place."
   }
 }

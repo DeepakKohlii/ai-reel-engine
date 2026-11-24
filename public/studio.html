@@ -4,18 +4,24 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Studio · AI Reel Engine</title>
+  <link rel="stylesheet" href="/fonts/instrument-serif/400.css" />
+  <link rel="stylesheet" href="/fonts/instrument-serif/400-italic.css" />
+  <link rel="stylesheet" href="/fonts/inter/400.css" />
+  <link rel="stylesheet" href="/fonts/inter/500.css" />
+  <link rel="stylesheet" href="/fonts/inter/600.css" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <aside>
     <a class="brand" href="/">Reel Engine</a>
     <button id="newBtn" class="primary wide">+ New reel</button>
+    <div class="label">Studio</div>
     <button id="homeBtn" class="wide nav">Start</button>
-    <button id="aestheticBtn" class="wide nav">✨ Aesthetic reels</button>
+    <button id="aestheticBtn" class="wide nav">Aesthetic reels</button>
     <button id="libraryBtn" class="wide nav">Asset library</button>
-    <button id="stylesBtn" class="wide nav">🎓 Learn from a reel</button>
-    <button id="motionsBtn" class="wide nav">🎬 Motion library</button>
-    <button id="instagramBtn" class="wide nav">📈 Instagram</button>
+    <button id="stylesBtn" class="wide nav">Learn from a reel</button>
+    <button id="motionsBtn" class="wide nav">Motion library</button>
+    <button id="instagramBtn" class="wide nav">Instagram</button>
     <div class="label">Packs</div>
     <ul id="packList"></ul>
   </aside>
@@ -33,7 +39,7 @@
           <button id="homeCreate" class="primary">Create reel</button>
         </div>
         <div class="row hero-alt">
-          <button id="homeIdeas" class="small">✨ Get trending ideas</button>
+          <button id="homeIdeas" class="small">Get trending ideas</button>
           <span class="muted">or pick a format below</span>
         </div>
       </div>
@@ -67,17 +73,17 @@
 
       <h2 class="section-title">Tools</h2>
       <div class="home-tools">
-        <button class="tool" data-go="stylesBtn"><b>🎓 Learn from a reel</b><span>Upload a reel you like and get a reusable style card</span></button>
-        <button class="tool" data-go="motionsBtn"><b>🎬 Motion library</b><span>Preview and rate every animation</span></button>
-        <button class="tool" data-go="libraryBtn"><b>🖼 Asset library</b><span>Your images, and the ones reels still need</span></button>
-        <button class="tool" data-go="instagramBtn"><b>📈 Instagram</b><span>Pull real stats back into new ideas</span></button>
+        <button class="tool" data-go="stylesBtn"><b>Learn from a reel</b><span>Upload a reel you like and get a reusable style card</span></button>
+        <button class="tool" data-go="motionsBtn"><b>Motion library</b><span>Preview and rate every animation</span></button>
+        <button class="tool" data-go="libraryBtn"><b>Asset library</b><span>Your images, and the ones reels still need</span></button>
+        <button class="tool" data-go="instagramBtn"><b>Instagram</b><span>Pull real stats back into new ideas</span></button>
       </div>
     </section>
 
     <section id="newView">
       <div class="row between">
         <h1>Style rules</h1>
-        <button id="ideasBtn" class="primary">✨ Get trending ideas</button>
+        <button id="ideasBtn" class="primary">Get trending ideas</button>
       </div>
       <p class="muted">Ideas are researched from what's trending now, the season and upcoming festivals, and your channel's style. Pick one and hit <b>Create reel</b>: the script, typography, colours, voice and images start generating, and the reel asks you for anything it can't make itself.</p>
       <div id="newMsg" class="muted"></div>
@@ -212,7 +218,7 @@
           <input type="file" name="file" accept="video/*" required /></label>
         <label>Link (optional, for your reference)<input name="link" placeholder="https://www.instagram.com/reel/..." /></label>
         <label>What do you like about it? (optional)<input name="notes" placeholder="e.g. the comment sticker and its sound, the typography, the fast cuts" /></label>
-        <div class="row"><button class="primary" type="submit">🎓 Learn this style</button><span id="learnMsg" class="hint"></span></div>
+        <div class="row"><button class="primary" type="submit">Learn this style</button><span id="learnMsg" class="hint"></span></div>
       </form>
       <div id="stylesList"></div>
     </section>

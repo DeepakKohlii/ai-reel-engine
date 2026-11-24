@@ -58,6 +58,8 @@ let poll = null;
 function show(view) {
   for (const id of ["homeView", "newView", "packView", "libraryView", "stylesView", "motionsView", "aestheticView", "instagramView"]) $(`#${id}`).hidden = id !== view;
   $("#health").hidden = view === "homeView";
+  const navFor = { homeView: "homeBtn", aestheticView: "aestheticBtn", libraryView: "libraryBtn", stylesView: "stylesBtn", motionsView: "motionsBtn", instagramView: "instagramBtn" };
+  $$("aside button.nav").forEach((b) => b.classList.toggle("active", b.id === navFor[view]));
 }
 
 let health = null;
@@ -201,7 +203,7 @@ async function getIdeas() {
   } catch (err) {
     $("#newMsg").innerHTML = errorHtml(err);
   } finally {
-    setBusy($("#ideasBtn"), false, "✨ Get trending ideas");
+    setBusy($("#ideasBtn"), false, "Get trending ideas");
   }
 }
 
@@ -1594,12 +1596,12 @@ async function showInstagram() {
     const msg = h("div", { class: "hint" });
     box.replaceChildren(
       h("div", { class: "card" },
-        h("h2", {}, "Connect @ivoryandindigo.in (one time, about 10 minutes)"),
+        h("h2", {}, "Connect your Instagram account (one time, about 10 minutes)"),
         h("p", { class: "muted" }, "Instagram's official API reads your followers and each reel's views, reach, saves, shares and watch time. It's read-only: it can't post, like or comment. You create the token yourself in Meta's developer site; it stays on this computer."),
         h("ol", {},
           h("li", {}, "Go to ", h("a", { href: "https://developers.facebook.com/apps", target: "_blank", rel: "noopener" }, "developers.facebook.com/apps"), ", log in with Facebook, and click Create app."),
           h("li", {}, "Pick the use case \"Manage messaging & content on Instagram\", name it (e.g. Reel Engine), create it."),
-          h("li", {}, "In the app, open Instagram → API setup with Instagram login → under \"Generate access tokens\" click Add account and log in as ivoryandindigo.in."),
+          h("li", {}, "In the app, open Instagram → API setup with Instagram login → under \"Generate access tokens\" click Add account and log in as your account."),
           h("li", {}, "If Instagram asks, accept the tester invite: Instagram app → Settings → Website permissions → Apps and websites → Tester invites."),
           h("li", {}, "Back in the app page, click Generate token next to the account, copy it, and paste it below.")),
         h("div", { class: "row" }, token, h("button", { class: "primary", onclick: async () => {
