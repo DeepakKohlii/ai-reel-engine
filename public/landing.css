@@ -355,3 +355,10 @@ footer .links a:hover { opacity: 1; }
   .hscroll { height: auto; }
   .hstrip { position: static; height: auto; overflow-x: auto; padding-bottom: 30px; }
 }
+
+.art-ink { background: var(--ink); color: var(--paper); }
+.art-indigo { background: var(--indigo); color: var(--paper); }
+.art-rust { background: var(--rust); color: var(--paper); }
+.art-ink em, .art-indigo em, .art-rust em { color: var(--sand); }
+.art-editorial em { font-size: 88px; }
+.art-editorial strong { font-size: 52px; }

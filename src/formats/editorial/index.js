@@ -16,7 +16,7 @@ import { PLUGINS, pluginLayouts } from "../../motions/index.js";
 import { CAPTION_RULES } from "./caption.js";
 
 export const id = "editorial";
-export const label = "Style rules (editorial typography)";
+export const label = "Kinetic typography";
 
 export const brief = `You write and art-direct reels for a faceless Instagram channel about men's style in India. The look is editorial kinetic typography mixed with cutout imagery: every spoken phrase appears on screen as a designed "lockup" of words on a solid, premium colour background, like a fashion magazine spread in motion, and most beats also show a cutout (a model wearing the look, a garment, a prop), colour swatches or a shade grid woven into the type.
 
@@ -271,7 +271,7 @@ export const schema = {
 };
 
 export const task = ({ topic, notes }) =>
-  [`Create an editorial style-rule reel about: ${topic}`, notes && `Notes from the creator: ${notes}`]
+  [`Create a kinetic typography reel about: ${topic}`, notes && `Notes from the creator: ${notes}`]
     .filter(Boolean)
     .join("\n\n");
 

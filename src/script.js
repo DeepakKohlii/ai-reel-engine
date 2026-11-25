@@ -4,6 +4,7 @@ import * as aesthetic from "./formats/aesthetic/index.js";
 import * as editorial from "./formats/editorial/index.js";
 import * as fit from "./formats/fit.js";
 import { checkScript, publicSchema } from "./schema-check.js";
+import { withTemplate } from "./templates.js";
 import { performanceContext } from "./results.js";
 
 export { parseJsonReply, scriptProvider } from "./claude.js";
@@ -66,9 +67,9 @@ export async function generateIdeas({ format, recent = [] }) {
   return ideas;
 }
 
-export const manualScriptPrompt = ({ format, topic, notes }) => {
+export const manualScriptPrompt = ({ format, topic, notes, template }) => {
   const f = getFormat(format);
-  return textPrompt(f.brief, f.task({ topic, notes }), publicSchema(f.schema));
+  return textPrompt(f.id === "editorial" ? withTemplate(f.brief, template) : f.brief, f.task({ topic, notes }), publicSchema(f.schema));
 };
 
 export const manualIdeasPrompt = ({ format, recent = [] }) =>

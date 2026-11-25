@@ -23,18 +23,24 @@ Needs Node 20+ and ffmpeg (`brew install ffmpeg`). Works best on macOS.
 | Voice | The free macOS voice |
 | Images | A free image generator (lower quality) |
 
-`http://localhost:4747` opens the product page. Click **Open the studio** (or go to `/studio`), type a topic (e.g. "monochrome outfits"), and hit **Create reel**.
+`http://localhost:4747` opens the product page. Click **Open the studio** (or go to `/studio`), type a topic (e.g. "why planes don't fly straight"), and hit **Create reel**.
 
 ---
 
-## What it makes
+## Templates
 
-| Format | Looks like | Language |
-|---|---|---|
-| **Style rules** (editorial) | Kinetic typography, colour boards, cutout models, colour wipes | Hinglish |
-| **Aesthetic** | A calm studio look: one model whose outfit changes in place, with small graphics on the words | English |
-| **AI fit** | A mirror-selfie outfit on an AI model with hook text and a "Comment LINK" sticker | Hinglish |
-| **Quick tips** | Tips over stock or AI clips with word-by-word captions | Hinglish |
+Any topic. The template decides how it's told.
+
+| Template | For |
+|---|---|
+| Explainer | One idea, made simple |
+| Typography | Words only |
+| Docs walkthrough | How something works, step by step |
+| Listicle | A countdown |
+| Story | A true story with a turn |
+| Data story | One number and what it means |
+
+Add your own in `src/templates.js`.
 
 ## How it works
 
@@ -67,7 +73,7 @@ Needs Node 20+ and ffmpeg (`brew install ffmpeg`). Works best on macOS.
 ```
 
 ### 1. Ideas (`src/ideas.js`)
-Claude suggests topics using what's trending, the season, a topic bank (`assets/topic-bank.json`), and how past reels performed (`src/results.js`). You can also type your own topic.
+Claude suggests topics using what's trending, the season, and how past reels performed (`src/results.js`). You can also type your own topic.
 
 ### 2. Script (`src/script.js`, `src/formats/*/writer.js`, `scriptwriter.js`)
 Every format has its own writer prompt and JSON schema. A script is a list of beats. Each beat has the spoken line, the on-screen words, the layout, the images it needs and the motion. `src/schema-check.js` validates the reply before anything else runs.
@@ -86,9 +92,9 @@ A separate reviewer prompt scores the script 1–10 on eleven criteria (hook, sp
 - Audio is cached by text and voice settings, so rebuilds don't pay again.
 
 ### 5. Visuals (`src/library.js`, `src/visuals.js`, `src/needs.js`)
-- Images (models, garments, props) live in a tagged library and are reused across reels.
+- Images (objects, people, screenshots) live in a tagged library and are reused across reels.
 - Missing images are generated: Gemini if you have a key, otherwise Cloudflare Workers AI (FLUX.2), otherwise a free generator. A "host" reference photo keeps the same person across poses.
-- Backgrounds are removed locally, and garments can be recoloured to an exact hex.
+- Backgrounds are removed locally.
 - The **Asset library** page lists every image a reel still needs, or only has a low-quality stand-in for, with a ready-to-paste prompt. Drop a better image on the card and it's swapped in on the next build.
 
 ### 6. Design and motion (`src/formats/`, `src/motions/`, `src/typography.js`)
@@ -120,7 +126,6 @@ Connect an Instagram professional account to pull per-reel stats (views, reach, 
 | Page | What it does |
 |---|---|
 | **+ New reel** | Get trending ideas or type a topic, then create the reel |
-| **Aesthetic reels** | The English studio format |
 | **Asset library** | Your images, missing images, and prompts to make them |
 | **Learn from a reel** | Upload a reference and get a style card |
 | **Motion library** | Preview every motion and rate it (like / dislike) |
@@ -165,6 +170,7 @@ src/
   pipeline.js         build / polish / approve / self-check jobs
   claude.js           API, CLI or manual Claude calls with JSON schemas
   ideas.js            topic ideas
+  templates.js        reel templates
   script.js           script entry point
   writers-room.js     review and rewrite loop
   voice.js            TTS with word timings
@@ -176,19 +182,16 @@ src/
   render.js           ffmpeg mix and encode
   instagram.js        Instagram stats
   formats/
-    editorial/        Style rules format
-    aesthetic/        Aesthetic format
-    fit.js            AI fit format
-    classic.js        Quick tips format
+    editorial/        kinetic typography format
   motions/            motion plugins and previews
 public/               the web UI
-assets/               style cards, topic bank, pronunciation, preferences
+assets/               style cards, pronunciation, preferences
 packs/                your reels (git-ignored)
 ```
 
 ## Design decisions
 
-- **Local-first.** It runs on your machine with your keys, so there are no hosting costs and your images never leave your computer.
+- **Local-first.** It runs on your machine with your keys, so there are no hosting costs. Data only goes to the services you turn on (Claude, voice, images).
 - **Structured output everywhere.** Every Claude call returns JSON against a schema, so each step can be checked and edited before the next one runs.
 - **A review loop, not one shot.** A separate reviewer pass catches weak hooks and filler before any money is spent on voice or images.
 - **Images over AI video.** Still images with designed motion are cheaper, more consistent and easier to fix than generated video. Video is used only when something really has to move.

@@ -31,9 +31,9 @@ const THEMES = ["cream", "espresso", "white", "butter", "blush", "navy", "olive"
 const FORMAT_INFO = {
   aesthetic: { title: "Aesthetic", desc: "Calm magazine-style English reels." },
   editorial: {
-    title: "Style rules",
+    title: "Kinetic typography",
     desc: "Editorial kinetic typography. Fully automatic.",
-    topic: "e.g. best colours for wheatish skin, monochrome outfits, 1 polo 5 outfits",
+    topic: "Any topic",
     notes: "Series name/part, points to include, the vibe...",
   },
   fit: {
@@ -52,6 +52,8 @@ const FORMAT_INFO = {
 
 let provider = "manual";
 let format = "editorial";
+let template = "explainer";
+let TEMPLATES = [];
 let current = null;
 let poll = null;
 
@@ -79,15 +81,16 @@ function renderHomeStatus() {
 }
 
 function renderHomeFormats() {
-  const cards = [
-    ["editorial", "Style rules", "Kinetic typography, colour boards and cutout models. Hinglish.", () => pickFormat("editorial")],
-    ["aesthetic", "Aesthetic", "A calm studio look where one model's outfit changes in place. English.", () => showAesthetic()],
-    ["fit", "AI fit", "A mirror-selfie outfit on an AI model with a Comment LINK sticker.", () => pickFormat("fit")],
-    ["classic", "Quick tips", "Tips over stock or AI clips with word-by-word captions.", () => pickFormat("classic")],
-  ];
   $("#homeFormats").replaceChildren(
-    ...cards.map(([id, title, desc, go]) => h("button", { class: `fmt fmt-${id}`, onclick: go }, h("b", {}, title), h("span", {}, desc), h("i", {}, "Start →"))),
+    ...TEMPLATES.map((t) => h("button", { class: "fmt", onclick: () => pickTemplate(t.id) }, h("b", {}, t.name), h("span", {}, t.desc), h("i", {}, "Start →"))),
   );
+}
+
+async function pickTemplate(id) {
+  template = id;
+  format = "editorial";
+  await showNew();
+  $("#topic").focus();
 }
 
 async function pickFormat(id) {
@@ -161,18 +164,11 @@ async function loadPacks() {
 
 function renderFormatCards() {
   $("#formatCards").replaceChildren(
-    ...Object.entries(FORMAT_INFO).map(([id, f]) =>
-      h(
-        "div",
-        { class: `fcard ${id === format ? "active" : ""}`, onclick: () => ((format = id), renderFormatCards()) },
-        h("strong", {}, f.title),
-        h("span", {}, f.desc),
-      ),
+    ...TEMPLATES.map((t) =>
+      h("div", { class: `fcard ${t.id === template ? "active" : ""}`, onclick: () => ((template = t.id), renderFormatCards()) }, h("strong", {}, t.name), h("span", {}, t.desc)),
     ),
   );
-  $("#topic").placeholder = FORMAT_INFO[format].topic;
-  $("#notes").placeholder = FORMAT_INFO[format].notes;
-  $("#notes").hidden = format === "editorial";
+  $("#topic").placeholder = `e.g. ${TEMPLATES.find((t) => t.id === template)?.topic ?? "any topic"}`;
 }
 
 async function showNew() {
@@ -198,7 +194,7 @@ async function getIdeas() {
   setBusy($("#ideasBtn"), true, "Researching trends...");
   $("#newMsg").textContent = "Claude is checking what's trending right now and planning ideas (1-3 minutes)...";
   try {
-    renderIdeas((await post("/api/ideas", { format: "editorial" })).ideas);
+    renderIdeas((await post("/api/ideas", { format: "editorial", template })).ideas);
     $("#newMsg").textContent = "";
   } catch (err) {
     $("#newMsg").innerHTML = errorHtml(err);
@@ -228,7 +224,7 @@ async function createReel({ topic, hook }, btn) {
   const notes = hook ? `Open with this hook (adapt it if needed): ${hook}` : "";
   if (provider === "manual") {
     try {
-      const { prompt } = await post("/api/prompt", { kind: "script", format, topic, notes });
+      const { prompt } = await post("/api/prompt", { kind: "script", format, topic, notes, template });
       await navigator.clipboard.writeText(prompt);
       pendingTopic = topic;
       $("#manualTopic").textContent = topic;
@@ -248,7 +244,7 @@ async function createReel({ topic, hook }, btn) {
       $("#newMsg").textContent = "";
       return await openPack(slug);
     }
-    const { id } = await post("/api/create", { topic, hook });
+    const { id } = await post("/api/create", { topic, hook, template });
     const started = Date.now();
     for (;;) {
       await new Promise((r) => setTimeout(r, 2000));
@@ -1821,7 +1817,7 @@ $("#learnForm").onsubmit = async (e) => {
 };
 $("#ideasBtn").onclick = getIdeas;
 $("#copyIdeasPrompt").onclick = async (e) => {
-  const { prompt } = await post("/api/prompt", { kind: "ideas", format: "editorial" });
+  const { prompt } = await post("/api/prompt", { kind: "ideas", template });
   await navigator.clipboard.writeText(prompt);
   flash(e.target, "Copied!");
 };
@@ -1887,7 +1883,7 @@ $("#applyJson").onclick = applyJson;
 loadHealth();
 let LAYOUTS = ["auto", "sandwich", "side", "hero", "float", "edge", "cards", "closeup", "slider", "verdict", "zoom", "scale", "duo", "mosaic", "corner", "dm"];
 api("/api/layouts").then((l) => (LAYOUTS = l)).catch(() => {});
-showHome();
+api("/api/templates").then((t) => { TEMPLATES = t; showHome(); });
 
 $("#copyCaptionBtn").onclick = async () => {
   const text = `${$("#caption").value.trim()}\n\n${$("#hashtags").value.trim()}`;

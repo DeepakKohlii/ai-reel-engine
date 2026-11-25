@@ -51,6 +51,7 @@ app.get("/api/health", (_req, res) =>
 
 const recentTopics = async () => (await listPacks()).slice(0, 30).map((p) => p.topic).filter(Boolean);
 
+app.get("/api/templates", async (_req, res) => res.json((await import("./templates.js")).TEMPLATES));
 app.get("/api/formats", (_req, res) => res.json(formatList()));
 app.get("/api/layouts", wrap(async (_req, res) => {
   const { schema } = await import("./formats/editorial/index.js");
@@ -58,7 +59,7 @@ app.get("/api/layouts", wrap(async (_req, res) => {
 }));
 
 app.post("/api/ideas", wrap(async (req, res) => {
-  if ((req.body.format ?? "editorial") === "editorial") return res.json({ ideas: await trendingIdeas({ recent: await recentTopics() }) });
+  if ((req.body.format ?? "editorial") === "editorial") return res.json({ ideas: await trendingIdeas({ recent: await recentTopics(), template: req.body.template }) });
   res.json({ ideas: await generateIdeas({ format: req.body.format, recent: await recentTopics() }) });
 }));
 
@@ -79,7 +80,7 @@ app.post("/api/create", wrap(async (req, res) => {
   (async () => {
     const extra = [hook && `Open with this hook (adapt it if needed): ${hook}`, notes].filter(Boolean).join("\n");
     const { writeScript } = req.body.format === "aesthetic" ? await import("./formats/aesthetic/writer.js") : await import("./formats/editorial/scriptwriter.js");
-    const script = await writeScript({ topic: topic.trim(), notes: extra });
+    const script = await writeScript({ topic: topic.trim(), notes: extra, template: req.body.template });
     const slug = slugify(topic);
     await savePack(slug, script);
     Object.assign(job, { state: "done", slug });
@@ -142,10 +143,10 @@ app.post("/api/prompt", wrap(async (req, res) => {
   const { kind, format, topic, notes } = req.body;
   if (kind === "ideas") {
     const recent = await recentTopics();
-    return res.json({ prompt: (format ?? "editorial") === "editorial" ? await ideasPrompt(recent) : manualIdeasPrompt({ format, recent }) });
+    return res.json({ prompt: (format ?? "editorial") === "editorial" ? await ideasPrompt(recent, req.body.template) : manualIdeasPrompt({ format, recent }) });
   }
   if (!topic?.trim()) return res.status(400).json({ error: "Topic is required" });
-  res.json({ prompt: manualScriptPrompt({ format, topic: topic.trim(), notes }) });
+  res.json({ prompt: manualScriptPrompt({ format, topic: topic.trim(), notes, template: req.body.template }) });
 }));
 
 app.post("/api/import", wrap(async (req, res) => {

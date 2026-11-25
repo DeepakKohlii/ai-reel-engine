@@ -17,7 +17,7 @@
     <button id="newBtn" class="primary wide">+ New reel</button>
     <div class="label">Studio</div>
     <button id="homeBtn" class="wide nav">Start</button>
-    <button id="aestheticBtn" class="wide nav">Aesthetic reels</button>
+    <button id="aestheticBtn" hidden></button>
     <button id="libraryBtn" class="wide nav">Asset library</button>
     <button id="stylesBtn" class="wide nav">Learn from a reel</button>
     <button id="motionsBtn" class="wide nav">Motion library</button>
@@ -35,12 +35,12 @@
         <h1 class="hero-title">Type a topic. Get a finished reel.</h1>
         <p class="hero-sub">Claude writes and reviews the script, then the engine records the voice, makes the images, animates every beat, checks its own render and exports the video with a cover and caption. It all runs on your machine.</p>
         <div class="row hero-form">
-          <input id="homeTopic" class="grow" placeholder="e.g. monochrome outfits, 1 polo 5 outfits, colours for wheatish skin" />
+          <input id="homeTopic" class="grow" placeholder="Any topic, e.g. why planes don't fly straight" />
           <button id="homeCreate" class="primary">Create reel</button>
         </div>
         <div class="row hero-alt">
           <button id="homeIdeas" class="small">Get trending ideas</button>
-          <span class="muted">or pick a format below</span>
+          <span class="muted">or pick a template below</span>
         </div>
       </div>
 
@@ -56,7 +56,7 @@
         </div>
       </div>
 
-      <h2 class="section-title">Formats</h2>
+      <h2 class="section-title">Templates</h2>
       <div id="homeFormats" class="home-formats"></div>
 
       <h2 class="section-title">How a reel is made</h2>
@@ -82,10 +82,10 @@
 
     <section id="newView">
       <div class="row between">
-        <h1>Style rules</h1>
+        <h1>New reel</h1>
         <button id="ideasBtn" class="primary">Get trending ideas</button>
       </div>
-      <p class="muted">Ideas are researched from what's trending now, the season and upcoming festivals, and your channel's style. Pick one and hit <b>Create reel</b>: the script, typography, colours, voice and images start generating, and the reel asks you for anything it can't make itself.</p>
+      <p class="muted">Ideas are researched from what's trending now, and the template you pick. Pick one and hit <b>Create reel</b>: the script, typography, colours, voice and images start generating, and the reel asks you for anything it can't make itself.</p>
       <div id="newMsg" class="muted"></div>
 
       <div id="manualIdeas" class="card" hidden>
@@ -102,7 +102,7 @@
       <div class="card">
         <h2>Or your own topic</h2>
         <div class="row">
-          <input id="topic" class="grow" placeholder="e.g. monochrome outfits, what to wear to a Diwali party" />
+          <input id="topic" class="grow" placeholder="Any topic, e.g. why planes don't fly straight" />
           <button id="createOwn" class="primary">Create reel</button>
         </div>
       </div>
@@ -116,11 +116,11 @@
         <div class="row"><button id="importBtn" class="primary">Create reel</button><span id="manualMsg" class="muted"></span></div>
       </div>
 
-      <details class="other-formats">
-        <summary class="muted">Other formats (AI fit, Quick tips)</summary>
+      <details class="other-formats" open>
+        <summary class="muted">Templates</summary>
         <div id="formatCards" class="formats"></div>
         <textarea id="notes" rows="2" placeholder="Notes" hidden></textarea>
-        <p class="hint">Pick a format, type the topic above and click Create reel.</p>
+        <p class="hint">Pick a template, type the topic above and click Create reel.</p>
       </details>
     </section>
 
@@ -225,10 +225,10 @@
 
     <section id="aestheticView" hidden>
       <h1>Aesthetic reels</h1>
-      <p class="muted">Calm, magazine-grade English reels: one quiet background, one model whose outfit changes, and small precise graphics on every word. Same flow as always: the script first (you approve it), then the plan, images (the same man in every outfit), the free draft voice and the render. The paid voice only when you click Record final voice.</p>
+      <p class="muted">Calm, magazine-grade English reels: one quiet background, one subject, and small precise graphics on every word. Same flow as always: the script first (you approve it), then the plan, images (the same man in every outfit), the free draft voice and the render. The paid voice only when you click Record final voice.</p>
       <form id="aestheticForm" class="card">
         <h2>New aesthetic reel</h2>
-        <label>Topic<input name="topic" required placeholder="e.g. shoes for baggy jeans, colour temperature, how a shirt should fit" /></label>
+        <label>Topic<input name="topic" required placeholder="Any topic" /></label>
         <label>Notes (optional)<input name="notes" placeholder="e.g. make it a which-looks-better, 3 sections, for broad guys" /></label>
         <div class="row"><button class="primary" type="submit">Write the script</button><span id="aestheticMsg" class="hint"></span></div>
       </form>
@@ -258,7 +258,7 @@
 
     <section id="libraryView" hidden>
       <h1>Asset library</h1>
-      <p class="muted">Cutout images reused across reels. Backgrounds are removed automatically. Real product photos and images from better free AI tools (Gemini, ChatGPT) look far better than the built-in generator, so upload those whenever you can. Tags are how reels find them (e.g. <code>model, olive, overshirt</code> or <code>tshirt, tee</code>).</p>
+      <p class="muted">Cutout images reused across reels. Backgrounds are removed automatically. Real photos and images from better free AI tools (Gemini, ChatGPT) look far better than the built-in generator, so upload those whenever you can. Tags are how reels find them (e.g. <code>model, olive, overshirt</code> or <code>tshirt, tee</code>).</p>
       <div class="card" id="needsCard">
         <div class="row between">
           <h2>Images your reels need <span id="needsCount" class="muted"></span></h2>
@@ -270,30 +270,30 @@
         <form id="uploadForm" class="card">
           <h2>Upload an image</h2>
           <input type="file" name="file" accept="image/*" required />
-          <p class="hint">Host = the same faceless guy in the same outfit, one image per pose. Tag each with <code>host</code> and the pose: <code>host, pointing</code>, <code>host, thinking</code>, <code>host, holding phone</code>... Make a set once in Gemini or ChatGPT from one reference photo so he stays consistent.</p>
+          <p class="hint">Host = the same person, one image per pose. Tag each with <code>host</code> and the pose: <code>host, pointing</code>, <code>host, thinking</code>, <code>host, holding phone</code>... Make a set once in Gemini or ChatGPT from one reference photo so he stays consistent.</p>
           <div class="row">
             <label class="grow">Kind
-              <select name="kind"><option value="item">Garment / shoe</option><option value="model">Model (person in an outfit)</option><option value="host">Host (the channel's presenter)</option><option value="prop">Prop</option></select>
+              <select name="kind"><option value="item">Object / screenshot</option><option value="model">Person</option><option value="host">Host (the channel's presenter)</option><option value="prop">Prop</option></select>
             </label>
-            <label class="grow">Tags<input name="tags" placeholder="tshirt, tee, white" /></label>
+            <label class="grow">Tags<input name="tags" placeholder="laptop, desk, white" /></label>
           </div>
           <label class="check"><input type="checkbox" name="keepBackground" value="true" /> Keep the background (don't cut out)</label>
           <div class="row"><button class="primary">Upload</button><span class="muted msg"></span></div>
         </form>
         <form id="generateForm" class="card">
           <h2>Generate with free AI</h2>
-          <textarea name="prompt" rows="3" placeholder="a plain crew neck cotton t-shirt, light grey" required></textarea>
+          <textarea name="prompt" rows="3" placeholder="a plain silver laptop, half open" required></textarea>
           <div class="row">
             <label class="grow">Kind
-              <select name="kind"><option value="item">Garment / shoe</option><option value="model">Model (person in an outfit)</option><option value="host">Host (the channel's presenter)</option><option value="prop">Prop</option></select>
+              <select name="kind"><option value="item">Object / screenshot</option><option value="model">Person</option><option value="host">Host (the channel's presenter)</option><option value="prop">Prop</option></select>
             </label>
-            <label class="grow">Tags<input name="tags" placeholder="tshirt, tee" /></label>
+            <label class="grow">Tags<input name="tags" placeholder="laptop, desk" /></label>
           </div>
           <div class="row">
             <label class="grow">Reference image 0<select class="ref"></select></label>
             <label class="grow">Reference image 1<select class="ref"></select></label>
           </div>
-          <p class="hint">With Cloudflare set up, references keep things consistent: "the same man as image 0, now pointing up", or try-on: "the man from image 0 wearing the shirt from image 1". Host poses automatically use the ★ host reference.</p>
+          <p class="hint">With Cloudflare set up, references keep things consistent: "the same person as image 0, now pointing up", or try-on: "the man from image 0 wearing the shirt from image 1". Host poses automatically use the ★ host reference.</p>
           <div class="row"><button class="primary">Generate</button><span class="muted msg"></span></div>
         </form>
       </div>

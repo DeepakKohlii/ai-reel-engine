@@ -1,3 +1,4 @@
+import { withTemplate } from "./templates.js";
 import { askJson } from "./claude.js";
 import { getFormat, validateScript } from "./script.js";
 import { publicSchema } from "./schema-check.js";
@@ -101,7 +102,7 @@ export async function reviewScript(script, topic, notes = "") {
   ]
     .filter(Boolean)
     .join("\n\n");
-  return askJson({ system: EDITOR, task, schema: REVIEW_SCHEMA, effort: "high" });
+  return askJson({ system: withTemplate(EDITOR, script.template), task, schema: REVIEW_SCHEMA, effort: "high" });
 }
 
 async function rewrite(f, script, review, topic, earlier = [], failed = null) {
@@ -120,7 +121,7 @@ async function rewrite(f, script, review, topic, earlier = [], failed = null) {
   ]
     .filter(Boolean)
     .join("\n\n");
-  const raw = await askJson({ system: f.brief, task, schema: publicSchema(f.schema), effort: "high" });
+  const raw = await askJson({ system: f.id === "editorial" ? withTemplate(f.brief, script.template) : f.brief, task, schema: publicSchema(f.schema), effort: "high" });
   return validateScript(raw, f.id);
 }
 
@@ -159,7 +160,7 @@ async function patch(f, script, review, topic, earlier = [], failed = null) {
   ]
     .filter(Boolean)
     .join("\n\n");
-  const raw = await askJson({ system: f.brief, task, schema, effort: "high" });
+  const raw = await askJson({ system: f.id === "editorial" ? withTemplate(f.brief, script.template) : f.brief, task, schema, effort: "high" });
   const beats = [...script.beats];
   const edits = [...(raw.edits ?? [])].filter((e) => e.beat >= 1 && e.beat <= beats.length).sort((a, b) => b.beat - a.beat);
   for (const e of edits) beats.splice(e.beat - 1, 1, ...(e.beats ?? []));

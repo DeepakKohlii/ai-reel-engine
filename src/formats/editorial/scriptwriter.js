@@ -2,48 +2,20 @@ import { askJson } from "../../claude.js";
 import { performanceContext } from "../../results.js";
 import { publicSchema } from "../../schema-check.js";
 import { validateScript } from "../../script.js";
-import { AUDIENCE } from "../shared.js";
+import { getTemplate, withTemplate } from "../../templates.js";
 import { brief, schema } from "./index.js";
 import { PLUGINS, libraryBrief, ratingOf } from "../../motions/index.js";
 
-const WRITER = `You write the voiceover for "Style rules" reels: a faceless Instagram channel about men's style in India. Editorial kinetic typography over outfit images, 25-40 seconds, one styling rule per reel.
+const WRITER = `You write the voiceover for short kinetic-typography reels on any subject, 25-40 seconds, one idea per reel.
 
-${AUDIENCE}
-
-How it must sound:
-- A sharp, friendly 22-year-old stylist casually explaining to a friend. Respectful: always "tum" (karo, dekho, likho, pehno); never "tu", "tera/tere" or bare commands ("kar", "kar lo", "ruk").
-- How something looks is said in the everyday English word guys use: "dull", "washed out", "tired", "off", "sharp", "clean", "balanced", "cheap". Never dramatic or literal Hindi for it ("thaka hua", "bimaar", "murjhaya", "bejaan", "tikti hai", "nigal leti hai", "kha jaati hai"): it sounds odd and the creator has rejected it many times.
-- Natural urban Hinglish the way guys actually talk, with plenty of everyday English ("shoes dikh hi nahi rahe", "fit ekdum off lagta hai", "look balanced ho jaata hai"). No bookish or hard Hindi ("tikti hai", "nigal leti hai"), no forced literal metaphors ("jeans shoe kha jaati hai"), no clipped caption-speak. Simple words.
-- One flow: the lines, read one after another, are one person talking. Every line leads into the next and makes sense by ear alone, without seeing the picture.
-
-Substance first (this is what makes people save and send a reel):
-- Teach something he doesn't already know: the WHY behind the advice (undertone, contrast, proportion, fabric, fit), a quick test he can do in front of the mirror, a number (1-2 inches, 3 shades apart), or a surprising exception. Every reel has at least 2 specific, non-obvious facts. "Ye colour achha lagta hai" is not information; why it works, and how to check it on yourself, is.
-- Be concrete: name the actual colours, fabrics, fits, lengths and situations. No filler lines that only sound good.
-
-Pick ONE shape that suits the topic (and differs from recent reels; see below):
-- Myth-bust: a belief he has, why it's wrong, what's actually true, how to check.
-- Mirror test: a 5-second test he can do right now, what the result means, what to do for each result.
-- Wrong vs right: one outfit fixed step by step, each step with its reason.
-- Countdown: 3 specific points, building to the most important one (promise it early: "teesra wala sabse zaroori hai").
-- Diagnosis: "agar tumhare saath ye hota hai..." (a symptom he recognises), the hidden cause, the fix.
-- Science/why: the one principle behind a whole category of advice, then 2 quick applications.
-- Challenge: "pause karo aur check karo..." then reveal what he should have noticed.
-Keep an open loop: raise a question or promise early and pay it off late, so he watches to the end.
-
-Hook (first 1-2 lines, the most important part): make him stop in under 2 seconds with something specific. Rotate between types: a counter-intuitive claim ("Black shirt tumhe mota dikhata hai"), a precise situation he's been in, a mistake he's making right now, a result he wants, or a heads-up ("Agli baar X pehno, usse pehle ye dekh lo", the creator's favourite, but not every time). Never a generic statement, a question he can answer with "no", or a slow build-up.
-
-Ending: one CTA only, split over 2-3 lines, in this shape: "Agar tumhe saare X ki list chahiye," / "toh comments mein KEYWORD likho," / "main list tumhare DM mein bhej dunga." People send a reel because it's useful or because it names a situation they know too well, never because a line asks them to think of someone: no "dost yaad aaya?", "tag that friend" or "us dost ko bhejo" type lines, they sound cringe.
-No greetings, no "aaj hum baat karenge", no follow/tag/share asks.
-
-Never use these stock moves (they make every reel sound the same): "Rule simple hai", "Simple rule:", "ekdum fresh", "game changer", "trust me", a list of occasions in the form "College mein X. Party mein Y. Office mein Z.", ending the teaching part with a one-line slogan every time, and any phrase listed below as already used on this channel.
-
-Lines:
-- Write the "paragraph" first: the whole voiceover as one natural spoken paragraph, full sentences joined the way people talk ("kyunki", "toh", "matlab", "aur agar", "isliye"), each thought leading into the next. No telegraphic fragments ("Camel jacket ka fix end mein", "shade aur undertone skin jaise"), no list of mini-sentences. Then cut that exact paragraph, word for word, into lines at natural phrase breaks: a line can end mid-sentence (the voice is recorded in one take, so line breaks add no pauses).
-- Length: 10-16 lines and 70-95 spoken words in total (about 30-38 seconds). Never more than 100 words: a tight reel keeps people watching; a long one loses them. Lines are 3-12 spoken words; short on-screen text never means short speech. Vary starts; don't open several lines with "Toh".
-- voiceover: exactly what's said, Roman-script Hinglish, numbers as spoken words, no emoji.
-- on_screen: what appears on screen for that line: words from that line, same order, you may drop filler, but it must read as a clear phrase on its own (never drop the subject: "Shoes dikh hi nahi rahe?" -> "SHOES / dikh hi nahi rahe?", not "dikh hi / nahi rahe?"). Use " / " between the stacked lines of text, 2-6 words total, CAPS for the key word.
-
-Before answering: write the whole voiceover as one paragraph, read it out loud in your head, fix anything that sounds written, odd or hard, then cut it into lines. Then check every sentence: would a 19-year-old understand it the first time he hears it, without seeing the screen? If he'd have to work out what it means, say it fully and plainly. No shortened grammar that drops the verb or the object ("toh ye colour upar nahi" -> "toh ye colour shirt mein mat pehno"), no pronoun he can't place, no unusual word where a common one exists ("gardan" -> "skin", "neck"). The advice must be correct enough that a professional stylist would nod.`;
+- Sound like one knowledgeable person explaining to a friend. Plain words, short natural sentences, each leading into the next. It must make sense by ear alone.
+- Teach at least 2 specific, non-obvious things with the reason behind them. No filler.
+- Hook: the first line stops the scroll with something specific: a surprising claim, a precise situation, a common mistake or a result. No greetings or slow build-up.
+- Raise a question early and pay it off late.
+- End with one call to action over 2-3 lines, asking viewers to comment the keyword.
+- Be accurate. Never invent facts, quotes, numbers or sources.
+- Write the whole voiceover as one paragraph first, then cut it word for word into 10-16 lines of 3-12 words, 70-95 words in total, never more than 100.
+- voiceover is exactly what is said. on_screen uses words from that line in the same order, 2-6 words, " / " between stacked lines, CAPS for the key word.`;
 
 const LINES = {
   type: "object",
@@ -51,9 +23,9 @@ const LINES = {
   required: ["title", "angle", "facts", "shape", "hook_options", "paragraph", "comment_keyword", "lines"],
   properties: {
     title: { type: "string" },
-    angle: { type: "string", description: "One or two sentences: why guys will save and share this" },
+    angle: { type: "string", description: "One or two sentences: why people will save and share this" },
     facts: { type: "array", items: { type: "string" }, description: "The 2-4 specific, non-obvious things this reel teaches (with the why), written before the lines" },
-    shape: { type: "string", enum: ["myth-bust", "mirror test", "wrong vs right", "countdown", "diagnosis", "science/why", "challenge"] },
+    shape: { type: "string", enum: ["myth-bust", "quick test", "wrong vs right", "countdown", "diagnosis", "science/why", "challenge"] },
     hook_options: { type: "array", items: { type: "string" }, description: "5 different hooks of different types; the script uses the strongest" },
     paragraph: { type: "string", description: "The whole voiceover as one natural spoken paragraph; lines are this, cut at phrase breaks" },
     comment_keyword: { type: "string" },
@@ -96,14 +68,14 @@ async function tighten(script) {
   return wordCount(shorter) < n ? shorter : script;
 }
 
-export async function writeScript({ topic, notes = "" }) {
+export async function writeScript({ topic, notes = "", template }) {
   const { recentScripts, scriptVarietyBrief } = await import("./variety.js");
   const scripts = await recentScripts(null);
   const task = [`Write the reel about: ${topic}`, notes && `Creator's notes: ${notes}`, scriptVarietyBrief(scripts), await performanceContext()]
     .filter(Boolean)
     .join("\n\n");
-  const raw = await askJson({ system: WRITER, task, schema: LINES, effort: "high" });
-  return tighten(await freshen(textScript(raw, topic), scripts));
+  const raw = await askJson({ system: withTemplate(WRITER, template), task, schema: LINES, effort: "high" });
+  return tighten(await freshen(textScript(raw, topic, { template: getTemplate(template).id }), scripts));
 }
 
 async function freshen(script, scripts) {
@@ -129,9 +101,9 @@ export async function reviseScript(script, notes, { skipTighten = false, skipFre
     `Current script:\nTitle: ${script.title}\nComment keyword: ${script.comment_keyword}\n${asText(linesOf(script))}`,
     scriptVarietyBrief(others),
   ].filter(Boolean).join("\n\n");
-  const raw = await askJson({ system: WRITER, task, schema: LINES, effort: "high" });
+  const raw = await askJson({ system: withTemplate(WRITER, script.template), task, schema: LINES, effort: "high" });
   const keep = {};
-  for (const k of ["aspect", "voice", "music", "sfx", "results", "styleChoice"]) if (script[k] !== undefined) keep[k] = script[k];
+  for (const k of ["template", "aspect", "voice", "music", "sfx", "results", "styleChoice"]) if (script[k] !== undefined) keep[k] = script[k];
   keep.previousDesign =
     script.stage === "text"
       ? script.previousDesign
@@ -261,7 +233,7 @@ export async function artDirect(script, pick = null, slug = null) {
     : pick?.mode === "borrow"
       ? `${taskWithPrev}\n\n${ingredientsBrief(pick.styles)}`
       : taskWithPrev);
-  const raw = await askJson({ system: brief, task: taskFinal, schema: publicSchema(schema), effort: "high" });
+  const raw = await askJson({ system: withTemplate(brief, script.template), task: taskFinal, schema: publicSchema(schema), effort: "high" });
   const full = validateScript(raw, "editorial");
   full.beats = full.beats.slice(0, lines.length);
   lines.forEach((l, i) => {
@@ -283,7 +255,7 @@ export async function artDirect(script, pick = null, slug = null) {
     out.sfx = style.card.sound.density;
     if (style.card.engine_settings?.look) out.look = { ...(out.look ?? {}), ...style.card.engine_settings.look };
   }
-  for (const k of ["aspect", "voice", "music", "sfx"]) if (script[k] !== undefined) out[k] = script[k];
+  for (const k of ["template", "aspect", "voice", "music", "sfx"]) if (script[k] !== undefined) out[k] = script[k];
   delete out.stage;
   delete out.lines;
   delete out.previousDesign;

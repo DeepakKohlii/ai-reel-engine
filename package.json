@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "AI content engine for faceless men's fashion reels: script, voiceover, visuals, typography, rough cut.",
+  "description": "AI pipeline that turns any topic into a finished reel.",
   "scripts": {
     "start": "node --watch-path=./src src/server.js"
   },

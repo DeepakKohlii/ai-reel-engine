@@ -3,10 +3,10 @@ const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
 const beats = [
-  { bg: "#efe2cc", ink: "#16130f", accent: "#8a5a2b", lines: [["s", "STOP WEARING"], ["i", "brown"], ["c", "WITH BLACK"]] },
-  { bg: "#2b3a67", ink: "#f4efe6", accent: "#d8c7a6", lines: [["s", "wear it with"], ["i", "these"]], swatches: ["#efe2cc", "#7d8b6a", "#16130f"] },
-  { bg: "#c4532d", ink: "#f4efe6", accent: "#16130f", lines: [["s", "the 3-colour"], ["c", "RULE"], ["k", "SAVE THIS"]] },
-  { bg: "#16130f", ink: "#f4efe6", accent: "#c4532d", lines: [["s", "comment"], ["c", "LIST"], ["i", "for all"], ["s", "7 FITS"]] },
+  { bg: "#efe2cc", ink: "#16130f", accent: "#8a5a2b", lines: [["s", "PLANES NEVER FLY"], ["i", "straight"], ["c", "HERE'S WHY"]] },
+  { bg: "#2b3a67", ink: "#f4efe6", accent: "#d8c7a6", lines: [["s", "start with"], ["i", "why"]], swatches: ["#efe2cc", "#7d8b6a", "#16130f"] },
+  { bg: "#c4532d", ink: "#f4efe6", accent: "#16130f", lines: [["s", "the 2-minute"], ["c", "RULE"], ["k", "SAVE THIS"]] },
+  { bg: "#16130f", ink: "#f4efe6", accent: "#c4532d", lines: [["s", "comment"], ["c", "LIST"], ["i", "for all"], ["s", "5 STEPS"]] },
 ];
 let beatN = 0;
 function playBeat() {
